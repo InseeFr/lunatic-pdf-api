@@ -20,12 +20,12 @@ This project provides an **Express-based API** to generate **PDF summaries** of 
 
 ```bash
 # Clone the repository
-git clone https://github.com/your-org/lunatic-pdf-api.git
+git clone https://github.com/InseeFr/lunatic-pdf-api.git
 cd lunatic-pdf-api
 
 # Install dependencies
 pnpm install
 
-# launch api
+# launch api on port 8080
 pnpm run dev
 
