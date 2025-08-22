@@ -1,0 +1,98 @@
+name: Lunatic PDF API release
+
+on:
+  push:
+    branches:
+      - "main"
+    paths-ignore: ["docs/**", "LICENSE", "CHANGELOG.md", "README.md"]
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  check_if_version_upgraded:
+    runs-on: ubuntu-latest
+    if: |
+      github.event_name == 'push' || 
+      github.event.pull_request.head.repo.owner.login == github.event.pull_request.base.repo.owner.login
+    outputs:
+      version: ${{ steps.version.outputs.prop }}
+      is_version_changed: ${{ steps.check.outputs.exists == 'false' }}
+      is_pre_release: ${{ contains(steps.version.outputs.prop, '-rc' ) }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: version
+        uses: notiz-dev/github-action-json-property@release
+        with:
+          path: "package.json"
+          prop_path: "version"
+      ## we check if repo contains already this tag, if not version, has changed
+      - uses: mukunku/tag-exists-action@v1.6.0
+        id: check
+        with:
+          tag: ${{ steps.version.outputs.prop }}
+
+  create-release:
+    needs: [check_if_version_upgraded]
+    # We create release only if the version in the package.json have been upgraded and this CI is running against the main branch.
+    # We allow branches with a PR open on main to publish pre-release (x.y.z-rc.u) but not actual releases.
+    if: |
+      (github.event_name == 'push' || needs.check_if_version_upgraded.outputs.is_pre_release == 'true') && 
+      needs.check_if_version_upgraded.outputs.is_version_changed == 'true'
+
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref }}
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Get previous release tag
+        id: previousTag
+        run: echo "previousTag=$(git --no-pager tag --sort=creatordate --merged ${{ github.ref_name }} | grep "^[0-9]\+\.[0-9]\+\.[0-9]\+$" | tail -1)" >> $GITHUB_OUTPUT
+
+      - name: Create tag
+        uses: rickstaa/action-create-tag@v1
+        with:
+          tag: ${{ needs.check_if_version_upgraded.outputs.version }}
+
+      # - name: Create release note
+      #   id: changelog
+      #   uses: requarks/changelog-action@v1
+      #   with:
+      #     fromTag: ${{ needs.check_if_version_upgraded.outputs.version }}
+      #     toTag: ${{ steps.previousTag.outputs.previousTag}}
+      #     excludeTypes: docs,style,chore,other
+      #     token: ${{ secrets.GITHUB_TOKEN }}
+      #     writeToFile: true
+      #     changelogFilePath: "CHANGELOG.md"
+
+      - name: Create GitHub release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ needs.check_if_version_upgraded.outputs.version }}
+          target_commitish: ${{ github.head_ref || github.ref }}
+          name: ${{ needs.check_if_version_upgraded.outputs.version }}
+          # body: ${{steps.changelog.outputs.changes}}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  publish-docker:
+    needs: [check_if_version_upgraded]
+    if: |
+      (github.event_name == 'push' || needs.check_if_version_upgraded.outputs.is_pre_release == 'true') && 
+      needs.check_if_version_upgraded.outputs.is_version_changed == 'true'
+
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Publish to Docker Hub
+        uses: elgohr/Publish-Docker-Github-Action@v5
+        with:
+          name: inseefr/lunatic-pdf-api
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+          default_branch: ${{ github.ref }}
+          tags: "latest,${{ needs.check_if_version_upgraded.outputs.version }}"
