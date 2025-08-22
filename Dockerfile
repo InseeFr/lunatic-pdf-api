@@ -27,4 +27,4 @@ USER nodeuser
 
 EXPOSE 8080
 
-CMD ["node", "/app/dist/index.js"]
+CMD ["node", "/app/dist/server.js"]
