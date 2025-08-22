@@ -3,7 +3,7 @@ import config from './config/config';
 
 const server = app.listen(config.port, () => {
     console.log(`Server is running on port ${config.port}`);
-    console.log(`Environnement "${process.env.NODE_ENV}"`)
+    console.log(`Server configuration`, config)
 });
 
 // Shutdown (SIGTERM/SIGINT) for kubernetes/docker
