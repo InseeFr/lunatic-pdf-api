@@ -1,5 +1,12 @@
+import path from "path";
 import { SwaggerOptions } from "swagger-ui-express";
 import { version } from '../../package.json'
+
+const isProd = process.env.NODE_ENV === "production";
+
+const routesPath = isProd
+    ? path.resolve(__dirname, "../routes/*.js")
+    : path.resolve(__dirname, "../routes/*.ts");
 
 export const swaggerOptions = {
     swaggerDefinition: {
@@ -7,7 +14,7 @@ export const swaggerOptions = {
 
         info: {
             title: 'Lunatic-pdf-api',
-            description: 'Lunatic-pdf-api Information',
+            description: `Lunatic-pdf-api Information`,
             version: version,
         },
         servers: [
@@ -16,5 +23,5 @@ export const swaggerOptions = {
             }
         ],
     },
-    apis: ['./src/routes/*.ts']
+    apis: [routesPath],
 } as SwaggerOptions

@@ -18,6 +18,8 @@ RUN pnpm install --prod
 
 FROM node:22.18.0-alpine3.22
 
+ENV NODE_ENV=production
+
 COPY --from=prod-deps /app/node_modules /app/node_modules
 COPY --from=build /app/dist /app/dist
 COPY --from=build /app/package.json /app/package.json
