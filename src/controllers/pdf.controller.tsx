@@ -6,12 +6,15 @@ export const generatePdf = async (req: Request, res: Response) => {
   const source = req.query.source as string;
   const data = req.body;
 
-  fetch(source)
-    .then((res) => res.json())
-    .then((data) => {
-      console.log("data fetched");
-      console.log(data);
-    });
+  try {
+    const responseSource = await fetch(source);
+    const sourceData = await responseSource.json();
+    console.log("data fetched from source");
+    console.log(sourceData);
+  } catch (e) {
+    console.error(e);
+    return res.status(500).send("KO");
+  }
 
   const pdfResult = await renderToStream(
     <DummyPdf source={source} data={data} />
