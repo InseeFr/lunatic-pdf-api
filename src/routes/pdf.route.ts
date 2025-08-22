@@ -9,41 +9,62 @@ const pdfRouter = express.Router();
  *   post:
  *     tags:
  *       - Pdf generation
- *     summary: Generate PDF
- *     description: Generate PDF from source and data from body
+ *     summary: Generate a PDF from a source and provided data
+ *     description: |
+ *       This endpoint generates a PDF based on:
+ *       - A **source** (the Lunatic questionnaire URL) provided as a query parameter. (ex URI from Registry-Api )
+ *       - Data provided in the request body (JSON format).
+ *
+ *       The PDF is returned as a binary file with the header `Content-Disposition: attachment; filename=export.pdf`.
  *     parameters:
  *       - in: query
  *         name: source
+ *         required: true
+ *         description: URL of the Lunatic questionnaire (URI format)
  *         schema:
  *           type: string
  *           format: uri
- *         required: true
- *         description: the url of lunatic questionnaire
  *     requestBody:
- *       description: the interrogation data containing lunatic-data
  *       required: true
+ *       description: Data used to populate the PDF
  *       content:
  *         application/json:
  *           schema:
  *             type: object
+ *             additionalProperties: true
+ *             description: |
+ *               The exact structure depends on your implementation, but should include:
+ *               - `data` (object): Questionnaire data
+ *               - `stateData` (object): State information
  *             properties:
- *                data:
- *                  type: object
- *                stateData:
- *                  type: object
- *                  properties:
- *                    state:
- *                      type: string
- *                      enum: [INIT, VALIDATED, COMPLETED]
- *                    date:
- *                      type: number
- *                    currentPage:
- *                      type: string
+ *               data:
+ *                 type: object
+ *                 description: Questionnaire data from Lunatic
+ *               stateData:
+ *                 type: object
+ *                 properties:
+ *                   state:
+ *                     type: string
+ *                     enum: [INIT, VALIDATED, COMPLETED]
+ *                     description: Current status of the questionnaire
+ *                   date:
+ *                     type: number
+ *                     description: Timestamp in milliseconds
+ *                   currentPage:
+ *                     type: string
+ *                     description: Current page of the questionnaire
  *     responses:
  *       '200':
- *         description: Return pdf
+ *         description: Returns a PDF file
+ *         content:
+ *           application/pdf:
+ *             schema:
+ *               type: string
+ *               format: binary
+ *       '400':
+ *         description: Missing or invalid `source` parameter
  *       '500':
- *         description: Internal server error
+ *         description: Internal server error during PDF generation
  */
 pdfRouter.post('/generate-from-source', generatePdf);
 
