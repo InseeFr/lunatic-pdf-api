@@ -1,5 +1,11 @@
+import path from "path";
 import { SwaggerOptions } from "swagger-ui-express";
 import { version } from '../../package.json'
+import config from './config';
+
+const routesPath = config.isProd
+    ? path.resolve(__dirname, "../routes/*.js")
+    : path.resolve(__dirname, "../routes/*.ts");
 
 export const swaggerOptions = {
     swaggerDefinition: {
@@ -7,14 +13,10 @@ export const swaggerOptions = {
 
         info: {
             title: 'Lunatic-pdf-api',
-            description: 'Lunatic-pdf-api Information',
-            version: version,
+            description: `Lunatic-pdf-api Information`,
+            version,
         },
-        servers: [
-            {
-                url: "http://localhost:8080"
-            }
-        ],
+        servers: [{ url: `${config.appScheme}://${config.appHost}`, description: "Generated server url from properties" }],
     },
-    apis: ['./src/routes/*.ts']
+    apis: [routesPath],
 } as SwaggerOptions
