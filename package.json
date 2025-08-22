@@ -23,8 +23,12 @@
     "typescript": "^5.9.2"
   },
   "dependencies": {
+    "@ag-media/react-pdf-table": "^2.0.3",
+    "@react-pdf/renderer": "^4.3.0",
     "dotenv": "^17.2.1",
     "express": "^5.1.0",
+    "react": "^19.1.1",
+    "react-error-boundary": "^6.0.0",
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^5.0.1"
   }
