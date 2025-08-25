@@ -25,7 +25,18 @@ cd lunatic-pdf-api
 
 # Install dependencies
 pnpm install
+```
 
+## Launch api-server
+
+```bash
 # launch api on port 8080
 pnpm run dev
+```
 
+## Launch pdf preview (minimal React + Vite app)
+
+```bash
+# launch vite app on port 5173
+pnpm run dev:preview
+```
