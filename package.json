@@ -6,7 +6,7 @@
     "dev:preview": "vite",
     "dev": "tsx watch src/server.ts",
     "build": "tsc",
-    "start:server": "cross-env NODE_ENV=production node dist/server.js"
+    "start": "cross-env NODE_ENV=production node dist/server.js"
   },
   "keywords": [],
   "author": "Insee",

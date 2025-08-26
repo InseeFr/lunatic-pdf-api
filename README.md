@@ -27,16 +27,24 @@ cd lunatic-pdf-api
 pnpm install
 ```
 
-## Launch api-server
+## 🌐 Launch api-server
 
 ```bash
 # launch api on port 8080
 pnpm run dev
 ```
 
-## Launch pdf preview (minimal React + Vite app)
+## 👩‍💻 Launch pdf preview (minimal React + Vite app)
+
+For development purposes only, read [README](./src/preview/README.md).
 
 ```bash
 # launch vite app on port 5173
 pnpm run dev:preview
 ```
+
+## 🐋 Docker
+
+You can run the docker image: `inseefr/lunatic-pdf-api`.
+
+The environment variable `APPLICATION_SCHEME` and `APPLICATION_HOST` are useful for swagger configuration. (default: `http` and `localhost:8080`)
