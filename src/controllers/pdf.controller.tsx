@@ -13,7 +13,7 @@ export const generatePdf = async (req: Request, res: Response) => {
     console.log(sourceData);
   } catch (e) {
     console.error(e);
-    return res.status(500).send("KO");
+    // return res.status(500).send("KO");
   }
 
   const pdfResult = await renderToStream(
