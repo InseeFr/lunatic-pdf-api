@@ -1,23 +1,23 @@
 import { renderToStream } from "@react-pdf/renderer";
 import { Request, Response } from "express";
-import { DummyPdf } from "../components/DummyPdf";
+import type { LunaticData, LunaticSource } from "@inseefr/lunatic";
+import { LunaticQuestionnaire } from "../components/LunaticQuestionnaire";
 
 export const generatePdf = async (req: Request, res: Response) => {
-  const source = req.query.source as string;
-  const data = req.body;
+  const data = req.body as { data: LunaticData };
+  let source: LunaticSource;
 
   try {
-    const responseSource = await fetch(source);
-    const sourceData = await responseSource.json();
+    // TODO : prevent loading arbitrary code from the query (whitelist domains ?)
+    const responseSource = await fetch(req.query.source as string);
+    source = await responseSource.json();
     console.log("data fetched from source");
-    console.log(sourceData);
   } catch (e) {
     console.error(e);
-    // return res.status(500).send("KO");
+    return res.status(500).send("Cannot fetch source");
   }
-
   const pdfResult = await renderToStream(
-    <DummyPdf source={source} data={data} />
+    <LunaticQuestionnaire source={source} data={data.data} />,
   );
 
   res.setHeader("Content-Type", "application/pdf");

@@ -30,6 +30,7 @@
   },
   "dependencies": {
     "@ag-media/react-pdf-table": "^2.0.3",
+    "@inseefr/lunatic": "^3.6.15-rc.5",
     "@react-pdf/renderer": "^4.3.0",
     "@react-pdf/stylesheet": "^6.1.0",
     "dotenv": "^17.2.1",
@@ -38,5 +39,8 @@
     "react-error-boundary": "^6.0.0",
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^5.0.1"
+  },
+  "volta": {
+    "node": "24.7.0"
   }
 }
