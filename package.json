@@ -4,7 +4,7 @@
   "description": "",
   "scripts": {
     "dev:preview": "vite",
-    "patch": "patch ./node_modules/.pnpm/node_modules/remark-emoji/package.json < patch/remark-emoji.patch && patch ./node_modules/.pnpm/node_modules/@react-pdf/pdfkit/lib/pdfkit.js < patch/@react-pdf__pdfkit.patch",
+    "patch": "patch ./node_modules/.pnpm/node_modules/@react-pdf/pdfkit/lib/pdfkit.js < patch/@react-pdf__pdfkit.patch",
     "dev": "tsx watch src/server.ts",
     "build": "tsc",
     "start": "cross-env NODE_ENV=production node dist/server.js"
