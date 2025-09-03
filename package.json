@@ -31,7 +31,7 @@
   },
   "dependencies": {
     "@ag-media/react-pdf-table": "^2.0.3",
-    "@inseefr/lunatic": "^3.6.15-rc.5",
+    "@inseefr/lunatic": "^3.6.15",
     "@react-pdf/renderer": "^4.3.0",
     "@react-pdf/stylesheet": "^6.1.0",
     "dotenv": "^17.2.1",
