@@ -1,0 +1,29 @@
+diff --git a/lib/index.js b/lib/index.js
+index e4df914a22d4b13d26feb12ac0433c02f5861c12..3fc04e1b8a61b9c5910cfea10bc37e517dde6208 100644
+--- a/lib/index.js
++++ b/lib/index.js
+@@ -2055,19 +2055,15 @@ const addNodeBookmark = (ctx, node, pageNumber, registry) => {
+         return;
+     node.children.forEach((child) => addNodeBookmark(ctx, child, pageNumber, registry));
+ };
+-const addBookmarks = (ctx, root) => {
+-    const registry = {};
+-    const pages = root.children || [];
+-    pages.forEach((page, i) => {
+-        addNodeBookmark(ctx, page, i, registry);
+-    });
+-};
+ 
+ const render = (ctx, doc) => {
+     const pages = doc.children || [];
+     const options = { imageCache: new Map(), fieldSets: [] };
+-    pages.forEach((page) => renderNode(ctx, page, options));
+-    addBookmarks(ctx, doc);
++    const registry = {};
++    pages.forEach((page, index) => {
++        renderNode(ctx, page, options);
++        addNodeBookmark(ctx, page, index, registry);
++    });
+     ctx.end();
+     return ctx;
+ };

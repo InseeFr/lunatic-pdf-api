@@ -1,0 +1,2 @@
+patchedDependencies:
+  '@react-pdf/render': patches/@react-pdf__render.patch
