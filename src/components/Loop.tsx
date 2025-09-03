@@ -9,6 +9,7 @@ import { hasResponse } from "../utils/lunatic";
 type Props = LunaticComponentProps<"Loop"> & { iterations?: VTLExpression };
 
 export function Loop({
+  id,
   label,
   interpret,
   components,
@@ -23,7 +24,7 @@ export function Loop({
     if (iterationsExpr) {
       return forceInt(
         interpret(iterationsExpr),
-        `Cannot interpret ${iterationsExpr} to get loop size ${label}`,
+        `Cannot interpret ${iterationsExpr} to get loop size ${label}`
       );
     }
 
@@ -45,7 +46,7 @@ export function Loop({
       {Array.from({ length: getIterations() }).map((_, k) => {
         const interpretAtIteration = decorateInterpretIteration(interpret, [k]);
         return (
-          <View key={k}>
+          <View key={`${id}-${k}`}>
             <Text style={styles.h3}>Iteration #{k + 1}</Text>
             <LunaticComponents
               components={components}

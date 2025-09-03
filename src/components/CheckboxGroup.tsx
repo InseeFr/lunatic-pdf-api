@@ -12,7 +12,7 @@ export function CheckboxGroup({ interpret, label, responses }: Props) {
         {responses
           .filter((r) => interpret(r.response.name))
           .map((r, k) => (
-            <Text style={styles.answer} key={k}>
+            <Text style={styles.answer} key={r.id}>
               - {interpret(r.label)}
             </Text>
           ))}

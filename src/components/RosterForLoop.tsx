@@ -2,7 +2,7 @@ import type { LunaticComponentProps } from "../types";
 import { ValueWithLabel } from "./ValueWithLabel";
 import { decorateInterpretIteration } from "../utils/vtl";
 import { LunaticComponent } from "./LunaticComponent";
-import { Table, TR, TD } from "@ag-media/react-pdf-table";
+import { Table, TR as PDFTr, TD as PDFTd } from "@ag-media/react-pdf-table";
 
 type Props = LunaticComponentProps<"RosterForLoop">;
 
@@ -28,16 +28,16 @@ export function RosterForLoop({ interpret, label, components }: Props) {
             k,
           ]);
           return (
-            <TR key={k}>
+            <PDFTr key={k}>
               {components.map((component, j) => (
-                <TD key={j}>
+                <PDFTd key={j}>
                   <LunaticComponent
                     component={component}
                     interpret={interpretAtIteration}
                   />
-                </TD>
+                </PDFTd>
               ))}
-            </TR>
+            </PDFTr>
           );
         })}
       </Table>
