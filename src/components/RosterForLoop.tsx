@@ -11,7 +11,7 @@ export function RosterForLoop({ interpret, label, components }: Props) {
   if (components.length === 0) {
     return null;
   }
-  const firstComponent = components.filter((c) => "response" in c).at(0);
+  const firstComponent = components.filter((c) => "response" in c)[0];
   if (!firstComponent) {
     return "Cannot find a component with a variable inside this RosterForLoop";
   }

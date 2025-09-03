@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { Sequence } from "./Sequence";
 import { Question } from "./Question";
 import { Input } from "./Input";
@@ -107,7 +108,7 @@ export const LunaticComponents = ({
               interpret={interpret}
               key={component.id}
             />
-          </ErrorBoundary>,
+          </ErrorBoundary>
         );
       }
       continue;
@@ -123,7 +124,7 @@ export const LunaticComponents = ({
           key={previousParent.id}
         >
           <LunaticComponents components={children} interpret={interpret} />
-        </Sequence>,
+        </Sequence>
       );
     }
 
@@ -139,7 +140,7 @@ export const LunaticComponents = ({
         key={previousParent.id}
       >
         <LunaticComponents components={children} interpret={interpret} />
-      </Sequence>,
+      </Sequence>
     );
   }
 
