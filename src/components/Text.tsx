@@ -1,6 +1,5 @@
-import type { PropsWithChildren, ReactNode } from "react";
 import { Text as PdfText } from "@react-pdf/renderer";
-import { depth, styles } from "./styles";
+import { styles } from "./styles";
 import { LunaticComponentProps } from "../types";
 
 type Props = LunaticComponentProps<"Text">;
