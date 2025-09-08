@@ -11,3 +11,11 @@ export function forceInt(n: unknown, message: string): number {
   }
   throw new Error(message ?? `Cannot cast ${typeof n} to int`);
 }
+
+
+export function forceBool(n: unknown, message: string): boolean {
+  if (typeof n === 'boolean') {
+    return Boolean(n);
+  }
+  throw new Error(message ?? `Cannot cast ${typeof n} to boolean`);
+}
