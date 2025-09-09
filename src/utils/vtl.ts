@@ -9,13 +9,21 @@ export type Interpreter = ReturnType<typeof makeInterpret>;
  */
 export function makeInterpret(store: LunaticVariablesStore) {
   return (expr: VTLExpression | string | undefined, iteration?: number[]) => {
-    if (!expr) {
-      return null;
+    try {
+      if (!expr) {
+        return null;
+      }
+      if (typeof expr === "string") {
+        return store.run(expr, { iteration }) as ReactNode;
+      }
+      return store.run(expr.value, { iteration }) as ReactNode;
+    } catch (error) {
+      // Log the error for debugging purposes
+      console.error("Error interpreting VTL expression:", error);
+      // fallback: return expression as string
+      return typeof expr === "string" ? expr : expr?.value
     }
-    if (typeof expr === "string") {
-      return store.run(expr, { iteration }) as ReactNode;
-    }
-    return store.run(expr.value, { iteration }) as ReactNode;
+
   };
 }
 
