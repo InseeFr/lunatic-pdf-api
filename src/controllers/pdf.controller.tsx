@@ -5,19 +5,20 @@ import { LunaticQuestionnaire } from "../components/LunaticQuestionnaire";
 
 export const generatePdf = async (req: Request, res: Response) => {
   const data = req.body as { data: LunaticData };
+  let sourceUri = req.query.source as string;
   let source: LunaticSource;
 
   try {
     // TODO : prevent loading arbitrary code from the query (whitelist domains ?)
-    const responseSource = await fetch(req.query.source as string);
+    console.log(`Reading source from URI ${sourceUri}`);
+    const responseSource = await fetch(sourceUri);
     source = await responseSource.json();
-    console.log("data fetched from source");
   } catch (e) {
     console.error(e);
-    return res.status(500).send("Cannot fetch source");
+    return res.status(500).send(`Cannot fetch source ${sourceUri}`);
   }
   const pdfResult = await renderToStream(
-    <LunaticQuestionnaire source={source} data={data.data} />,
+    <LunaticQuestionnaire source={source} data={data.data} />
   );
 
   res.setHeader("Content-Type", "application/pdf");

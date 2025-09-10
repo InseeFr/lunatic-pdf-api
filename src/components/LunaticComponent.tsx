@@ -5,6 +5,7 @@ import { Input } from "./Input";
 import { CheckboxBoolean } from "./CheckboxBoolean";
 import { Duration } from "./Duration";
 import { Radio } from "./Radio";
+import { Text as TextOverload } from "./Text";
 import { CheckboxGroup } from "./CheckboxGroup";
 import { Table } from "./Table";
 import { RosterForLoop } from "./RosterForLoop";
@@ -16,11 +17,15 @@ import { depth, styles } from "./styles";
 import { Empty } from "./Empty";
 import type { ReactNode } from "react";
 import type { LunaticComponentDefinition } from "@inseefr/lunatic";
+import { Roundabout } from "./Roundabout";
+import { Suggester } from "./Suggester";
 
 const componentTypes = {
   Sequence: Sequence,
   Question: Question,
+  Text: TextOverload,
   Textarea: Input,
+  Suggester: Suggester,
   Input: Input,
   InputNumber: Input,
   Datepicker: Input,
@@ -34,6 +39,7 @@ const componentTypes = {
   Subsequence: Sequence,
   RosterForLoop: RosterForLoop,
   Loop: Loop,
+  Roundabout: Roundabout,
   FilterDescription: Empty,
 };
 
@@ -102,7 +108,10 @@ export const LunaticComponents = ({
         children.push(component);
       } else {
         items.push(
-          <ErrorBoundary key={component.id} fallbackRender={fallbackRenderer}>
+          <ErrorBoundary
+            key={component?.id}
+            fallbackRender={fallbackRenderer(component)}
+          >
             <LunaticComponent
               component={component}
               interpret={interpret}
@@ -147,11 +156,13 @@ export const LunaticComponents = ({
   return <>{items}</>;
 };
 
-const fallbackRenderer = ({ error }: FallbackProps) => {
-  return (
-    <Text style={styles.error}>
-      Error rendering {component.componentType} : {error.toString()} #
-      {component.id}
-    </Text>
-  );
-};
+const fallbackRenderer =
+  (component: LunaticComponentDefinition) =>
+  ({ error }: FallbackProps) => {
+    return (
+      <Text style={styles.error}>
+        Error rendering {component?.componentType} (id:
+        {component?.id}): {error?.message}
+      </Text>
+    );
+  };

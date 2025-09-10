@@ -1,46 +1,39 @@
 import type { LunaticComponentProps, VTLExpression } from "../types";
 import { LunaticComponents } from "./LunaticComponent";
 import { Text, View } from "@react-pdf/renderer";
-import { forceInt } from "../utils/cast";
+import { forceBool, forceInt } from "../utils/cast";
 import { decorateInterpretIteration } from "../utils/vtl";
 import { styles } from "./styles";
 
 type Props = LunaticComponentProps<"Loop"> & { iterations?: VTLExpression } & {
-  lines?: { min?: VTLExpression; max?: VTLExpression };
+  item?: { description?: VTLExpression; disabled?: VTLExpression };
 };
-
-export function Loop({
+export function Roundabout({
   id,
   interpret,
+  item,
   components,
   iterations: iterationsExpr,
-  lines,
 }: Props) {
-  if (components.length === 0) {
-    return null;
-  }
-
   const getNbRows = () => {
     const iterations = forceInt(
       interpret(iterationsExpr ?? "1"),
-      `Cannot interpret ${iterationsExpr} to get loop size ${id}`
+      `Cannot interpret ${iterationsExpr} to get roundabout size ${id}`
     );
 
-    const min = forceInt(
-      interpret(lines?.min ?? "1"),
-      `Cannot interpret ${lines?.min ?? "1"} to get loop size ${id}`
-    );
-
-    return Math.max(min, iterations);
+    return iterations;
   };
 
   return (
     <>
       {Array.from({ length: getNbRows() }).map((_, k) => {
         const interpretAtIteration = decorateInterpretIteration(interpret, [k]);
+        if (forceBool(interpretAtIteration(item?.disabled), "")) return;
         return (
           <View key={`${id}-${k}`}>
-            <Text style={styles.h3}>Iteration #{k + 1}</Text>
+            <Text style={styles.h3}>
+              {interpretAtIteration(item?.description)}
+            </Text>
             <LunaticComponents
               components={components}
               interpret={interpretAtIteration}
