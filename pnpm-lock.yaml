@@ -18,7 +18,7 @@ importers:
         version: 2.0.3(@react-pdf/renderer@4.3.0(react@19.1.1))(@react-pdf/stylesheet@6.1.0)(react@19.1.1)
       '@inseefr/lunatic':
         specifier: ^3.6.15
-        version: 3.7.0(@types/react@19.1.12)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+        version: 3.7.0(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       '@react-pdf/renderer':
         specifier: ^4.3.0
         version: 4.3.0(react@19.1.1)
@@ -52,10 +52,10 @@ importers:
         version: 24.3.1
       '@types/react':
         specifier: ^19.1.10
-        version: 19.1.12
+        version: 19.1.13
       '@types/react-dom':
         specifier: ^19.1.7
-        version: 19.1.9(@types/react@19.1.12)
+        version: 19.1.9(@types/react@19.1.13)
       '@types/swagger-jsdoc':
         specifier: ^6.0.4
         version: 6.0.4
@@ -762,8 +762,8 @@ packages:
     peerDependencies:
       '@types/react': ^19.0.0
 
-  '@types/react@19.1.12':
-    resolution: {integrity: sha512-cMoR+FoAf/Jyq6+Df2/Z41jISvGZZ2eTlnsaJRptmZ76Caldwy1odD4xTr/gNV9VLj0AWgg/nmkevIyUfIIq5w==}
+  '@types/react@19.1.13':
+    resolution: {integrity: sha512-hHkbU/eoO3EG5/MZkuFSKmYqPbSVk5byPFa3e7y/8TybHiLMACgI8seVYlicwk7H5K/rI2px9xrQp/C+AUDTiQ==}
 
   '@types/send@0.17.5':
     resolution: {integrity: sha512-z6F2D3cOStZvuk2SaP6YrwkNO65iTZcwA2ZkSABegdkAh/lf+Aa/YQndZVfmEXT5vgAp6zv06VQ3ejSVjAny4w==}
@@ -2467,7 +2467,7 @@ snapshots:
 
   '@humanwhocodes/retry@0.4.3': {}
 
-  '@inseefr/lunatic@3.7.0(@types/react@19.1.12)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+  '@inseefr/lunatic@3.7.0(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
     dependencies:
       '@inseefr/trevas': 0.1.21
       '@inseefr/vtl-2.0-antlr-tools': 0.3.2
@@ -2477,7 +2477,7 @@ snapshots:
       minisearch: 7.1.2
       react: 19.1.1
       react-error-boundary: 4.1.2(react@19.1.1)
-      react-markdown: 9.1.0(@types/react@19.1.12)(react@19.1.1)
+      react-markdown: 9.1.0(@types/react@19.1.13)(react@19.1.1)
       react-number-format: 5.4.4(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       react-tooltip: 5.29.1(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       remark-breaks: 4.0.0
@@ -2828,11 +2828,11 @@ snapshots:
 
   '@types/range-parser@1.2.7': {}
 
-  '@types/react-dom@19.1.9(@types/react@19.1.12)':
+  '@types/react-dom@19.1.9(@types/react@19.1.13)':
     dependencies:
-      '@types/react': 19.1.12
+      '@types/react': 19.1.13
 
-  '@types/react@19.1.12':
+  '@types/react@19.1.13':
     dependencies:
       csstype: 3.1.3
 
@@ -4013,11 +4013,11 @@ snapshots:
 
   react-is@16.13.1: {}
 
-  react-markdown@9.1.0(@types/react@19.1.12)(react@19.1.1):
+  react-markdown@9.1.0(@types/react@19.1.13)(react@19.1.1):
     dependencies:
       '@types/hast': 3.0.4
       '@types/mdast': 4.0.4
-      '@types/react': 19.1.12
+      '@types/react': 19.1.13
       devlop: 1.1.0
       hast-util-to-jsx-runtime: 2.3.6
       html-url-attributes: 3.0.1
