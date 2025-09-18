@@ -41,7 +41,8 @@ export const generatePdf = async (req: Request, res: Response) => {
       "INVALID_URI",
       "The provided URI is invalid.",
       400,
-      { uri: sourceUri }
+      { uri: sourceUri },
+      { error: e instanceof Error ? e.message : e }
     );
   }
 
