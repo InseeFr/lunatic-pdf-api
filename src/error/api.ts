@@ -1,12 +1,20 @@
 import { Response } from "express";
 
 interface ApiError {
-    code: string; // Code interne pour identifier l'erreur
-    message: string; // Message lisible par l'utilisateur ou le développeur
-    details?: unknown; // Détails supplémentaires (optionnel)
+    code: ErrorCode; // Internal Code interne for error
+    message: string; // explicite message
+    details?: unknown; // other optional details
 }
 
-export const errorResponse = (res: Response, code: string, message: string, status = 500, details?: unknown) => {
+export enum ErrorCode {
+    UNAUTHORIZED_ERROR = "UNAUTHORIZED_ERROR",
+    INVALID_URI = "INVALID_URI",
+    UNAUTHORIZED_HOST = "UNAUTHORIZED_HOST",
+    SOURCE_FETCH_ERROR = "SOURCE_FETCH_ERROR",
+    PDF_GENERATION_ERROR = "PDF_GENERATION_ERROR"
+}
+
+export const errorResponse = (res: Response, code: ErrorCode, message: string, status = 500, details?: unknown) => {
     return res.status(status).json({
         code,
         message,
