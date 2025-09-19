@@ -3,13 +3,13 @@ import { Request, Response } from "express";
 import type { LunaticData, LunaticSource } from "@inseefr/lunatic";
 import { LunaticQuestionnaire } from "../components/LunaticQuestionnaire";
 import config from "../config/config";
-import { errorResponse } from "../error/api";
+import { ErrorCode, errorResponse } from "../error/api";
 
 const { trustUriDomains } = config;
 
 const handleError = (
   res: Response,
-  code: string,
+  code: ErrorCode,
   message: string,
   status = 500,
   details?: unknown,
@@ -29,7 +29,7 @@ export const generatePdf = async (req: Request, res: Response) => {
   let sourceUri = req.query.source as string;
 
   if (!sourceUri) {
-    return handleError(res, "INVALID_URI", "Missing source URI", 400);
+    return handleError(res, ErrorCode.INVALID_URI, "Missing source URI", 400);
   }
 
   let url: URL;
@@ -38,7 +38,7 @@ export const generatePdf = async (req: Request, res: Response) => {
   } catch (e) {
     return handleError(
       res,
-      "INVALID_URI",
+      ErrorCode.INVALID_URI,
       "The provided URI is invalid.",
       400,
       { uri: sourceUri },
@@ -49,7 +49,7 @@ export const generatePdf = async (req: Request, res: Response) => {
   if (!isUriAuthorized(url.toString())) {
     return handleError(
       res,
-      "UNAUTHORIZED_HOST",
+      ErrorCode.UNAUTHORIZED_HOST,
       "The host is not authorized.",
       403,
       { host: url.host }
@@ -62,7 +62,7 @@ export const generatePdf = async (req: Request, res: Response) => {
     if (!responseSource.ok) {
       return errorResponse(
         res,
-        "SOURCE_FETCH_FAILED",
+        ErrorCode.SOURCE_FETCH_ERROR,
         "Failed to fetch the source.",
         responseSource.status
       );
@@ -71,7 +71,7 @@ export const generatePdf = async (req: Request, res: Response) => {
   } catch (e) {
     return handleError(
       res,
-      "SOURCE_FETCH_ERROR",
+      ErrorCode.SOURCE_FETCH_ERROR,
       "An error occurred while fetching the source.",
       500,
       { error: e instanceof Error ? e.message : e }
@@ -87,7 +87,7 @@ export const generatePdf = async (req: Request, res: Response) => {
     pdfResult.on("error", (err) => {
       errorResponse(
         res,
-        "PDF_GENERATION_ERROR",
+        ErrorCode.PDF_GENERATION_ERROR,
         "Failed to generate PDF.",
         500,
         { error: err }
@@ -96,7 +96,7 @@ export const generatePdf = async (req: Request, res: Response) => {
   } catch (e) {
     return errorResponse(
       res,
-      "PDF_GENERATION_ERROR",
+      ErrorCode.PDF_GENERATION_ERROR,
       "Failed to generate PDF.",
       500,
       { error: e instanceof Error ? e.message : e }
