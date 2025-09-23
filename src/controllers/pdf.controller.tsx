@@ -4,6 +4,7 @@ import type { LunaticData, LunaticSource } from "@inseefr/lunatic";
 import { LunaticQuestionnaire } from "../components/LunaticQuestionnaire";
 import config from "../config/config";
 import { ErrorCode, errorResponse } from "../error/api";
+import { logger } from "../logger";
 
 const { trustUriDomains } = config;
 
@@ -16,6 +17,7 @@ const handleError = (
   error?: unknown
 ) => {
   console.error(error);
+  logger.error(message);
   return errorResponse(res, code, message, status, details);
 };
 
@@ -27,6 +29,8 @@ const isUriAuthorized = (uri: string): boolean => {
 export const generatePdf = async (req: Request, res: Response) => {
   const data = req.body as { data: LunaticData };
   let sourceUri = req.query.source as string;
+
+  logger.info(`Generating PDF (source=${sourceUri ?? "none"})`);
 
   if (!sourceUri) {
     return handleError(res, ErrorCode.INVALID_URI, "Missing source URI", 400);
@@ -93,6 +97,7 @@ export const generatePdf = async (req: Request, res: Response) => {
         { error: err }
       );
     });
+    logger.info("PDF successfully generated");
   } catch (e) {
     return errorResponse(
       res,
