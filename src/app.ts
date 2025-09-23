@@ -7,6 +7,7 @@ import { swaggerOptions } from './config/swagger';
 import helmet from 'helmet';
 import { initJwtMiddleware, jwtErrorHandler } from './middleware/auth';
 import config from './config/config';
+import { loggerAuthMiddleware, loggerMiddleware } from './middleware/logger';
 
 
 const swaggerDocs = swaggerjsdoc(swaggerOptions)
@@ -17,9 +18,8 @@ async function createServer() {
     // See: https://helmetjs.github.io/ add http security header
     app.use(helmet());
 
-    app.get("/", (_req: Request, res: Response) => {
-        res.redirect("/api-docs");
-    });
+    // handle request logging 
+    app.use(loggerMiddleware);
 
     if (config.oidcEnabled) {
         // Initialize JWT middleware
@@ -34,14 +34,19 @@ async function createServer() {
                 ],
             })
         );
+        // handle JWT error
+        app.use(jwtErrorHandler);
+        // handle auth logging 
+        app.use(loggerAuthMiddleware);
     }
 
+
+    app.get("/", (_req: Request, res: Response) => {
+        res.redirect("/api-docs");
+    });
     app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs))
     app.use('/api/pdf', pdfRoute);
     app.use('/api/healthcheck', healthRoute)
-
-    // handle JWT error
-    if (config.oidcEnabled) app.use(jwtErrorHandler);
 
     return app;
 }
