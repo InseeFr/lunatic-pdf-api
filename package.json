@@ -41,7 +41,8 @@
     "react": "^19.1.1",
     "react-error-boundary": "^6.0.0",
     "swagger-jsdoc": "^6.2.8",
-    "swagger-ui-express": "^5.0.1"
+    "swagger-ui-express": "^5.0.1",
+    "winston": "^3.17.0"
   },
   "volta": {
     "node": "24.8.0"
