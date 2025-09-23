@@ -3,13 +3,15 @@ import { Request, Response, NextFunction } from "express";
 import config from "../config/config";
 import { expressJwtSecret } from "jwks-rsa";
 import { ErrorCode, errorResponse } from '../error/api';
+import { logger } from '../logger';
 
 async function getOpenidConfiguration() {
     try {
         const response = await fetch(`${config.oidcIssuer}/.well-known/openid-configuration`);
         return await response.json()
     } catch (error) {
-        console.error("Error retrieving OpenID configuration:", error);
+        console.error(error)
+        logger.error(`Error retrieving OpenID configuration`);
         throw new Error("Error retrieving OpenID configuration");
     }
 }
@@ -27,6 +29,7 @@ export async function initJwtMiddleware() {
         }),
         algorithms: openidConfig.id_token_signing_alg_values_supported ?? ["RS256"],
         issuer: openidConfig.issuer,
+        requestProperty: "auth",
     });
 }
 
