@@ -6,6 +6,13 @@ import { logger } from "../logger";
 export type Interpreter = ReturnType<typeof makeInterpret>;
 
 /**
+ * Remove infobulle content from text
+ */
+function removeInfobulle(text: string): string {
+  return text.replace(/\[([^\]]+)\]\([.\s]*["'][^"']*["'][.\s]*\)/g, '$1');
+}
+
+/**
  * Generate an interpret function that will execute VTL expression
  */
 export function makeInterpret(store: LunaticVariablesStore) {
@@ -15,16 +22,18 @@ export function makeInterpret(store: LunaticVariablesStore) {
         return null;
       }
       if (typeof expr === "string") {
-        return store.run(expr, { iteration }) as ReactNode;
+        const result = store.run(expr, { iteration }) as ReactNode;
+        return typeof result === "string" ? removeInfobulle(result) : result;
       }
-      return store.run(expr.value, { iteration }) as ReactNode;
+      const result = store.run(expr.value, { iteration }) as ReactNode;
+      return typeof result === "string" ? removeInfobulle(result) : result;
     } catch (error) {
       // Log the error for debugging purposes
       logger.error(`Error interpreting VTL expression: ${JSON.stringify(error, null, "\t")}`);
-      // fallback: return expression as string
-      return typeof expr === "string" ? expr : expr?.value
+      // fallback: return expression as string with infobulle removed
+      const fallbackText = typeof expr === "string" ? expr : expr?.value;
+      return fallbackText && typeof fallbackText === "string" ? removeInfobulle(fallbackText) : fallbackText;
     }
-
   };
 }
 
@@ -39,3 +48,4 @@ export function decorateInterpretIteration(
     return interpreter(args[0], args[1] ?? iteration);
   };
 }
+
