@@ -10,7 +10,18 @@ import {
 } from "@ag-media/react-pdf-table";
 import { Text } from "@react-pdf/renderer";
 import { styles } from "./styles";
+import { MarkdownPDF } from "../utils/markdownParser";
+
 type Props = LunaticComponentProps<"Table">;
+
+function renderCellContent(interpretedLabel: any) {
+  return typeof interpretedLabel === 'string' ? (
+    <MarkdownPDF markdown={interpretedLabel} />
+  ) : (
+    <Text style={styles.answer}>{interpretedLabel}</Text>
+  );
+}
+
 
 export function Table({ interpret, label, body }: Props) {
   return (
@@ -28,7 +39,7 @@ export function Table({ interpret, label, body }: Props) {
                     <LunaticComponent interpret={interpret} component={col} />
                   </ErrorBoundary>
                 ) : (
-                  <Text style={styles.answer}>{interpret(col.label)}</Text>
+                  renderCellContent(interpret(col.label))
                 )}
               </PDFTd>
             ))}
