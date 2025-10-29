@@ -12,10 +12,21 @@ import { Text } from "@react-pdf/renderer";
 import { styles } from "./styles";
 type Props = LunaticComponentProps<"Table">;
 
-export function Table({ interpret, label, body }: Props) {
+export function Table({ interpret, label, body, header }: Props) {
   return (
     <ValueWithLabel label={interpret(label)}>
       <PDFTable style={styles.table}>
+        {header && (
+          <PDFTr>
+            {header.map((col, x) => (
+              <PDFTd key={x} style={styles.th}>
+                <Text style={styles.headerText}>
+                  {interpret(col.label)}
+                </Text>
+              </PDFTd>
+            ))}
+          </PDFTr>
+        )}
         {body.map((row, y) => (
           <PDFTr key={y}>
             {row.map((col, x) => (
