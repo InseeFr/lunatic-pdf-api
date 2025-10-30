@@ -80,6 +80,16 @@ export const styles = {
 	td: {
 		padding: rem(0.2),
 	},
+	th: {
+		backgroundColor: '#f0f0f0',
+		padding: 8,
+		borderBottom: '2pt solid #333',
+	},
+	headerText: {
+		fontWeight: 'bold',
+		fontSize: 12,
+		color: '#333',
+	},
 	table: {
 		marginBottom: rem(1),
 	},

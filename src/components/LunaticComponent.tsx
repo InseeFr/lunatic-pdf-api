@@ -158,11 +158,11 @@ export const LunaticComponents = ({
 
 const fallbackRenderer =
   (component: LunaticComponentDefinition) =>
-  ({ error }: FallbackProps) => {
-    return (
-      <Text style={styles.error}>
-        Error rendering {component?.componentType} (id:
-        {component?.id}): {error?.message}
-      </Text>
-    );
-  };
+    ({ error }: FallbackProps) => {
+      return (
+        <Text style={styles.error}>
+          Error rendering {component?.componentType} (id:
+          {component?.id}): {error?.message}
+        </Text>
+      );
+    };
