@@ -2,8 +2,9 @@ import React from "react";
 import { Text, View } from "@react-pdf/renderer";
 import ReactMarkdown from "react-markdown";
 import { Components } from "react-markdown";
-import { styles } from "../components/styles";
 import { Style } from "@react-pdf/stylesheet";
+
+import { styles } from "../components/styles";
 
 const createPdfComponents = (customStyle?: Style): Components => ({
     h1: ({ children }) => React.createElement(Text, {
@@ -70,9 +71,8 @@ interface MarkdownInterpreterProps {
 export const MarkdownPDF: React.FC<MarkdownInterpreterProps> = ({ markdown, style }) => {
     const processedMarkdown = processLineBreaks(markdown);
 
-    return React.createElement(View, null,
-        React.createElement(ReactMarkdown, {
-            components: style ? createPdfComponents(style) : pdfComponents
-        }, processedMarkdown)
-    );
+    return React.createElement(ReactMarkdown, {
+        components: style ? createPdfComponents(style) : pdfComponents
+    }, processedMarkdown)
+
 };
