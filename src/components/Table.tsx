@@ -8,37 +8,20 @@ import {
   TR as PDFTr,
   TD as PDFTd,
 } from "@ag-media/react-pdf-table";
-import { Text } from "@react-pdf/renderer";
 import { styles } from "./styles";
-import { MarkdownPDF } from "../utils/markdownParser";
+import { renderContent } from "../utils/markdownParser";
 
 type Props = LunaticComponentProps<"Table">;
 
-function renderCellContent(interpretedLabel: any) {
-  return typeof interpretedLabel === 'string' ? (
-    <MarkdownPDF markdown={interpretedLabel} />
-  ) : (
-    <Text style={styles.answer}>{interpretedLabel}</Text>
-  );
-}
-
-function renderHeaderContent(interpretedLabel: any) {
-  return typeof interpretedLabel === 'string' ? (
-    <MarkdownPDF style={styles.headerText} markdown={interpretedLabel} />
-  ) : (
-    <Text style={styles.headerText}>{interpretedLabel}</Text>
-  );
-}
-
 export function Table({ interpret, label, body, header }: Props) {
   return (
-    <ValueWithLabel label={interpret(label)}>
+    <ValueWithLabel interpret={interpret} label={label}>
       <PDFTable style={styles.table}>
         {header && (
           <PDFTr>
             {header.map((col, x) => (
               <PDFTd key={x} style={styles.th}>
-                {renderHeaderContent(interpret(col.label))}
+                {renderContent(interpret, col.label, styles.headerText)}
               </PDFTd>
             ))}
           </PDFTr>
@@ -55,7 +38,7 @@ export function Table({ interpret, label, body, header }: Props) {
                     <LunaticComponent interpret={interpret} component={col} />
                   </ErrorBoundary>
                 ) : (
-                  renderCellContent(interpret(col.label))
+                  renderContent(interpret, col.label, styles.answer)
                 )}
               </PDFTd>
             ))}
