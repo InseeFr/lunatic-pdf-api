@@ -31,6 +31,10 @@ const createPdfComponents = (customStyle?: Style): Components => ({
         style: customStyle ? [styles.emphasis, customStyle] : styles.emphasis
     }, children),
 
+    a: ({ children }) => React.createElement(Text, {
+        style: customStyle ? [styles.link, customStyle] : styles.link
+    }, children),
+
     ul: ({ children }) => React.createElement(View, {
         style: styles.list
     }, children),
@@ -39,14 +43,7 @@ const createPdfComponents = (customStyle?: Style): Components => ({
         style: styles.list
     }, children),
 
-    // Unused for now, may be interesting to handle internal links & tooltip 
 
-    // a: ({ children, href }) => React.createElement(Link, {
-    //     src: href || '',
-    //     style: customStyle ?
-    //         { ...styles.link } :
-    //         styles.link
-    // }, children),
 
 });
 
@@ -70,9 +67,12 @@ interface MarkdownInterpreterProps {
 
 export const MarkdownPDF: React.FC<MarkdownInterpreterProps> = ({ markdown, style }) => {
     const processedMarkdown = processLineBreaks(markdown);
+    console.log("processedMarkdown", processedMarkdown);
 
-    return React.createElement(ReactMarkdown, {
-        components: style ? createPdfComponents(style) : pdfComponents
-    }, processedMarkdown)
+    return React.createElement(View, null,
+        React.createElement(ReactMarkdown, {
+            components: style ? createPdfComponents(style) : pdfComponents
+        }, processedMarkdown)
+    );
 
 };

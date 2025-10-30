@@ -22,6 +22,13 @@ function renderCellContent(interpretedLabel: any) {
   );
 }
 
+function renderHeaderContent(interpretedLabel: any) {
+  return typeof interpretedLabel === 'string' ? (
+    <MarkdownPDF style={styles.headerText} markdown={interpretedLabel} />
+  ) : (
+    <Text style={styles.headerText}>{interpretedLabel}</Text>
+  );
+}
 
 export function Table({ interpret, label, body, header }: Props) {
   return (
@@ -31,9 +38,7 @@ export function Table({ interpret, label, body, header }: Props) {
           <PDFTr>
             {header.map((col, x) => (
               <PDFTd key={x} style={styles.th}>
-                <Text style={styles.headerText}>
-                  {interpret(col.label)}
-                </Text>
+                {renderHeaderContent(interpret(col.label))}
               </PDFTd>
             ))}
           </PDFTr>

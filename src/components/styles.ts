@@ -98,9 +98,9 @@ export const styles = {
 		marginLeft: 20,
 	},
 	link: {
-		color: colors.link,
-		textDecoration: 'underline',
+		//color: colors.link,
 		lineHeight: 1.5,
+		textDecoration: 'none'
 	},
 
 } as Record<string, Style>;
