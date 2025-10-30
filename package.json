@@ -9,6 +9,7 @@
     "build": "tsc",
     "start": "cross-env NODE_ENV=production node dist/server.js",
     "test": "vitest --config vitest.config.ts",
+    "test:coverage": "vitest run --coverage",
     "test:run": "vitest run --config vitest.config.ts"
   },
   "keywords": [],
@@ -27,6 +28,7 @@
     "@types/swagger-jsdoc": "^6.0.4",
     "@types/swagger-ui-express": "^4.1.8",
     "@vitejs/plugin-react": "^5.0.1",
+    "@vitest/coverage-v8": "4.0.5",
     "@vitest/ui": "^4.0.5",
     "cross-env": "^10.0.0",
     "eslint": "^9.33.0",
