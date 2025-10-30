@@ -7,7 +7,7 @@ type Props = LunaticComponentProps<'InputNumber'>;
 
 export function Input({ interpret, label, response, unit }: Props) {
 	return (
-		<ValueWithLabel label={interpret(label)}>
+		<ValueWithLabel interpret={interpret} label={label}>
 			<Text style={styles.answer}>
 				{interpret(response.name) ?? '__'}{' '}
 				{typeof unit === 'string' ? unit : interpret(unit)}

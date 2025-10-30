@@ -4,6 +4,7 @@ const colors = {
 	foreground: '#0a0a0a',
 	muted: '#737373',
 	border: '#e5e5e5',
+	link: '#291ad3ff',
 };
 
 const rem = (v: number = 1) => Math.round(v * 16);
@@ -47,10 +48,24 @@ export const styles = {
 		borderLeftColor: colors.border,
 		marginBottom: rem(1),
 	},
+	paragraph: {
+		marginBottom: 10,
+		lineHeight: 1.5,
+		fontSize: rem(0.75),
+	},
 	answer: {
 		color: colors.muted,
 		fontSize: rem(0.75),
 		lineHeight: 1.25,
+	},
+	strong: {
+		fontSize: rem(0.75),
+		lineHeight: 1.25,
+		fontWeight: 'bold',
+	},
+	emphasis: {
+		fontSize: rem(0.75),
+		fontStyle: 'italic',
 	},
 	label: {
 		color: colors.foreground,
@@ -78,4 +93,14 @@ export const styles = {
 	table: {
 		marginBottom: rem(1),
 	},
+	list: {
+		marginBottom: 10,
+		marginLeft: 20,
+	},
+	link: {
+		//color: colors.link,
+		lineHeight: 1.5,
+		textDecoration: 'none'
+	},
+
 } as Record<string, Style>;

@@ -7,7 +7,7 @@ type Props = LunaticComponentProps<"CheckboxGroup">;
 
 export function CheckboxGroup({ interpret, label, responses }: Props) {
   return (
-    <ValueWithLabel label={interpret(label)}>
+    <ValueWithLabel interpret={interpret} label={label}>
       <View>
         {responses
           .filter((r) => interpret(r.response.name))

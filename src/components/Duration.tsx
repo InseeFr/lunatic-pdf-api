@@ -35,7 +35,7 @@ function periodToString(duration?: string): string | null {
 
 export function Duration({ interpret, label, response }: Props) {
   return (
-    <ValueWithLabel label={interpret(label)}>
+    <ValueWithLabel interpret={interpret} label={label}>
       <Text style={styles.answer}>
         {periodToString(interpret(response.name) as string)}
       </Text>
