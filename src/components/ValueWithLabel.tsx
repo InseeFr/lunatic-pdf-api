@@ -1,5 +1,5 @@
 import type { PropsWithChildren, ReactNode } from "react";
-import { Text, View } from "@react-pdf/renderer";
+import { View } from "@react-pdf/renderer";
 import { depth, styles } from "./styles";
 import { renderContent } from "../utils/markdownParser";
 import { VTLExpression } from "../types";

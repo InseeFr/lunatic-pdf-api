@@ -2,7 +2,8 @@ import { render, screen } from '@testing-library/react';
 import { describe, it, expect, vi } from 'vitest';
 import '@testing-library/jest-dom';
 
-import { MarkdownPDF } from './markdownParser';
+import { MarkdownPDF, renderContent } from './markdownParser';
+import { VTLExpression } from '../types';
 
 vi.mock('../../components/styles', () => ({
     styles: {
@@ -84,4 +85,41 @@ describe('MarkdownPDF', () => {
         expect(screen.queryAllByText).toHaveLength(0);
     });
 
+    it('render Markdwown only if the label has type VTL|MD', () => {
+        const interpret = vi.fn((expr: string | VTLExpression | undefined): React.ReactNode => {
+            if (typeof expr === 'string') {
+                return expr;
+            }
+            if (expr && typeof expr === 'object' && 'value' in expr) {
+                return expr.value;
+            }
+            return '';
+        });
+        const label: VTLExpression = { value: '# Markdown Title', type: 'VTL|MD' };
+
+        const renderedContent = renderContent(interpret, label);
+
+        render(<>{renderedContent}</>);
+
+        expect(screen.getByText('Markdown Title')).toBeInTheDocument();
+
+    })
+
+    it('render plain text if the label is not of type VTL|MD', () => {
+        const interpret = vi.fn((expr: string | VTLExpression | undefined): React.ReactNode => {
+            if (typeof expr === 'string') {
+                return expr;
+            }
+            if (expr && typeof expr === 'object' && 'value' in expr) {
+                return expr.value;
+            }
+            return '';
+        });
+        const label: VTLExpression = { value: '# Not Markdown Title', type: 'TXT' };
+
+        const renderedContent = renderContent(interpret, label);
+        render(<>{renderedContent}</>);
+
+        expect(screen.getByText('# Not Markdown Title')).toBeInTheDocument();
+    })
 });

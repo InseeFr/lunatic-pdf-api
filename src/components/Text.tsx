@@ -1,8 +1,7 @@
-import { Text as PdfText } from "@react-pdf/renderer";
 import { styles } from "./styles";
 import { LunaticComponentProps } from "../types";
 import { renderContent } from "../utils/markdownParser";
-import { render } from "@testing-library/react";
+
 
 type Props = LunaticComponentProps<"Text">;
 

@@ -1,7 +1,7 @@
 import React, { ReactNode } from "react";
 import { Text, View } from "@react-pdf/renderer";
-import ReactMarkdown from "react-markdown";
-import { Components } from "react-markdown";
+import ReactMarkdown, { Components } from "react-markdown";
+
 import { Style } from "@react-pdf/stylesheet";
 
 import { styles } from "../components/styles";
