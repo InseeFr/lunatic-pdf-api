@@ -21,7 +21,7 @@ export function RosterForLoop({ interpret, label, components }: Props) {
   }
   const iterations = firstComponentValue.length;
   return (
-    <ValueWithLabel label={interpret(label)}>
+    <ValueWithLabel interpret={interpret} label={label}>
       <Table>
         {Array.from({ length: iterations }).map((_, k) => {
           const interpretAtIteration = decorateInterpretIteration(interpret, [

@@ -7,7 +7,7 @@ type Props = LunaticComponentProps<"Suggester">;
 
 export function Suggester({ interpret, label, response }: Props) {
   return (
-    <ValueWithLabel label={interpret(label)}>
+    <ValueWithLabel interpret={interpret} label={label}>
       <Text style={styles.answer}>{interpret(response.name) ?? "__"} </Text>
     </ValueWithLabel>
   );
