@@ -1,11 +1,15 @@
 import type { PropsWithChildren, ReactNode } from "react";
-import { Text, View } from "@react-pdf/renderer";
+import { View } from "@react-pdf/renderer";
 import { depth, styles } from "./styles";
+import { renderContent } from "../utils/markdownParser";
+import { VTLExpression } from "../types";
 
 type Props = PropsWithChildren<{
-  label: ReactNode;
+  interpret: (expr: VTLExpression | string | undefined) => ReactNode;
+  label: VTLExpression | undefined
 }>;
-export function ValueWithLabel({ label, children }: Props) {
+
+export function ValueWithLabel({ interpret, label, children }: Props) {
   if (!label) {
     return children;
   }
@@ -13,7 +17,7 @@ export function ValueWithLabel({ label, children }: Props) {
     return (
       <View style={styles.question1} wrap={false}>
         <View style={[styles.question1, styles.question]} wrap={false}>
-          <Text style={styles.label}>{label}</Text>
+          {renderContent(interpret, label, styles.label)}
           {children}
         </View>
       </View>
@@ -21,7 +25,7 @@ export function ValueWithLabel({ label, children }: Props) {
   }
   return (
     <View style={[styles.question, styles.question1]} wrap={false}>
-      <Text style={styles.label}>{label}</Text>
+      {renderContent(interpret, label, styles.label)}
       {children}
     </View>
   );
