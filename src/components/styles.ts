@@ -84,11 +84,16 @@ export const styles = {
 		backgroundColor: '#f0f0f0',
 		padding: 8,
 		borderBottom: '2pt solid #333',
+		display: 'flex',
+		alignItems: 'center',
+		justifyContent: 'center',
+
 	},
 	headerText: {
 		fontWeight: 'bold',
-		fontSize: 12,
+		fontSize: rem(0.6),
 		color: '#333',
+		marginBottom: 0,
 	},
 	table: {
 		marginBottom: rem(1),

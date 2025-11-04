@@ -3,10 +3,17 @@ import { ValueWithLabel } from "./ValueWithLabel";
 import { decorateInterpretIteration } from "../utils/vtl";
 import { LunaticComponent } from "./LunaticComponent";
 import { Table, TR as PDFTr, TD as PDFTd } from "@ag-media/react-pdf-table";
+import { styles } from "./styles";
+import { renderContent } from "../utils/markdownParser";
 
 type Props = LunaticComponentProps<"RosterForLoop">;
 
-export function RosterForLoop({ interpret, label, components }: Props) {
+export function RosterForLoop({
+  interpret,
+  label,
+  components,
+  header,
+}: Props) {
   // There is no subcomponents for this roster for loop
   if (components.length === 0) {
     return null;
@@ -22,7 +29,16 @@ export function RosterForLoop({ interpret, label, components }: Props) {
   const iterations = firstComponentValue.length;
   return (
     <ValueWithLabel interpret={interpret} label={label}>
-      <Table>
+      <Table style={styles.table}>
+        {header && (
+          <PDFTr>
+            {header.map((col, x) => (
+              <PDFTd key={x} style={styles.th}>
+                {renderContent(interpret, col.label, styles.headerText)}
+              </PDFTd>
+            ))}
+          </PDFTr>
+        )}
         {Array.from({ length: iterations }).map((_, k) => {
           const interpretAtIteration = decorateInterpretIteration(interpret, [
             k,
@@ -30,7 +46,7 @@ export function RosterForLoop({ interpret, label, components }: Props) {
           return (
             <PDFTr key={k}>
               {components.map((component, j) => (
-                <PDFTd key={j}>
+                <PDFTd key={j} style={styles.td}>
                   <LunaticComponent
                     component={component}
                     interpret={interpretAtIteration}
