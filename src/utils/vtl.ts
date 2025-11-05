@@ -1,7 +1,6 @@
 import type { LunaticVariablesStore } from "@inseefr/lunatic";
 import type { ReactNode } from "react";
 import type { VTLExpression } from "../types";
-import { logger } from "../logger";
 
 export type Interpreter = ReturnType<typeof makeInterpret>;
 
@@ -19,12 +18,9 @@ export function makeInterpret(store: LunaticVariablesStore) {
       }
       return store.run(expr.value, { iteration }) as ReactNode;
     } catch (error) {
-      // Log the error for debugging purposes
-      logger.error(`Error interpreting VTL expression: ${JSON.stringify(error, null, "\t")}`);
       // fallback: return expression as string
-      return typeof expr === "string" ? expr : expr?.value
+      return typeof expr === "string" ? expr : expr?.value;
     }
-
   };
 }
 
@@ -33,7 +29,7 @@ export function makeInterpret(store: LunaticVariablesStore) {
  */
 export function decorateInterpretIteration(
   interpreter: Interpreter,
-  iteration: number[],
+  iteration: number[]
 ) {
   return (...args: Parameters<Interpreter>) => {
     return interpreter(args[0], args[1] ?? iteration);

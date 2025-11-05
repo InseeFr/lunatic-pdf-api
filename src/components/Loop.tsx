@@ -21,14 +21,16 @@ export function Loop({
   }
 
   const getNbRows = () => {
+    const iterationsValue = typeof iterationsExpr === 'object' && iterationsExpr !== null ? iterationsExpr.value : iterationsExpr ?? "1";
     const iterations = forceInt(
       interpret(iterationsExpr ?? "1"),
-      `Cannot interpret ${iterationsExpr} to get loop size ${id}`
+      `Cannot interpret ${iterationsValue} to get loop size ${id}`
     );
 
+    const minValue = typeof lines?.min === 'object' && lines?.min !== null ? lines.min.value : lines?.min ?? "1";
     const min = forceInt(
       interpret(lines?.min ?? "1"),
-      `Cannot interpret ${lines?.min ?? "1"} to get loop size ${id}`
+      `Cannot interpret ${minValue} to get loop size ${id}`
     );
 
     return Math.max(min, iterations);
