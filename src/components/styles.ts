@@ -20,21 +20,21 @@ export const styles = {
 	h1: {
 		color: colors.foreground,
 		fontWeight: 'semibold',
-		fontSize: rem(1.5),
+		fontSize: rem(1.1),
 		lineHeight: 1.3,
-		marginTop: rem(2),
+		marginTop: rem(1),
 		marginBottom: rem(1),
 	},
 	h2: {
 		color: colors.foreground,
 		fontWeight: 'semibold',
-		fontSize: rem(1.25),
+		fontSize: rem(1),
 		marginBottom: rem(1),
 	},
 	h3: {
 		color: colors.foreground,
 		fontWeight: 'semibold',
-		fontSize: rem(1.15),
+		fontSize: rem(0.9),
 		marginTop: rem(1.2),
 		marginBottom: rem(1),
 	},
@@ -51,7 +51,7 @@ export const styles = {
 	paragraph: {
 		marginBottom: 10,
 		lineHeight: 1.5,
-		fontSize: rem(0.75),
+		fontSize: rem(0.5),
 	},
 	answer: {
 		color: colors.muted,
