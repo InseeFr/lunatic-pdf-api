@@ -10,7 +10,7 @@ export function Radio({ interpret, label, response, options }: Props) {
   const selectedOption = options.find((o) => o.value === value);
 
   return (
-    <ValueWithLabel label={interpret(label)}>
+    <ValueWithLabel interpret={interpret} label={label}>
       <Text style={styles.answer}>
         {value} -{" "}
         {selectedOption

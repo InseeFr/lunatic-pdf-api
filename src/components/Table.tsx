@@ -8,21 +8,20 @@ import {
   TR as PDFTr,
   TD as PDFTd,
 } from "@ag-media/react-pdf-table";
-import { Text } from "@react-pdf/renderer";
 import { styles } from "./styles";
+import { renderContent } from "../utils/markdownParser";
+
 type Props = LunaticComponentProps<"Table">;
 
 export function Table({ interpret, label, body, header }: Props) {
   return (
-    <ValueWithLabel label={interpret(label)}>
+    <ValueWithLabel interpret={interpret} label={label}>
       <PDFTable style={styles.table}>
         {header && (
           <PDFTr>
             {header.map((col, x) => (
               <PDFTd key={x} style={styles.th}>
-                <Text style={styles.headerText}>
-                  {interpret(col.label)}
-                </Text>
+                {renderContent(interpret, col.label, styles.headerText)}
               </PDFTd>
             ))}
           </PDFTr>
@@ -39,7 +38,7 @@ export function Table({ interpret, label, body, header }: Props) {
                     <LunaticComponent interpret={interpret} component={col} />
                   </ErrorBoundary>
                 ) : (
-                  <Text style={styles.answer}>{interpret(col.label)}</Text>
+                  renderContent(interpret, col.label, styles.answer)
                 )}
               </PDFTd>
             ))}
