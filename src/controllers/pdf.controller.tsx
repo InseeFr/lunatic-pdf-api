@@ -5,6 +5,7 @@ import { LunaticQuestionnaire } from "../components/LunaticQuestionnaire";
 import config from "../config/config";
 import { ErrorCode, errorResponse } from "../error/api";
 import { logger } from "../logger";
+import { Nomenclature } from "../models/nomenclature";
 
 const { trustUriDomains } = config;
 
@@ -77,6 +78,29 @@ export const generatePdf = async (req: Request, res: Response) => {
       res,
       ErrorCode.SOURCE_FETCH_ERROR,
       "An error occurred while fetching the source.",
+      500,
+      { error: e instanceof Error ? e.message : e }
+    );
+  }
+
+  //TODO: cache
+  let nomenclatures: Nomenclature[];
+  try {
+    const responseNomenclature = await fetch(sourceUri);
+    if (!responseNomenclature.ok) {
+      return errorResponse(
+        res,
+        ErrorCode.SOURCE_FETCH_ERROR,
+        "Failed to fetch the nomenclature.",
+        responseNomenclature.status
+      );
+    }
+    nomenclatures = await responseNomenclature.json();
+  } catch (e) {
+    return handleError(
+      res,
+      ErrorCode.SOURCE_FETCH_ERROR,
+      "An error occurred while fetching the nomenclature.",
       500,
       { error: e instanceof Error ? e.message : e }
     );
