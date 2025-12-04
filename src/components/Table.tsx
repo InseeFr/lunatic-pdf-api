@@ -10,41 +10,48 @@ import {
 } from "@ag-media/react-pdf-table";
 import { styles } from "./styles";
 import { renderContent } from "../utils/markdownParser";
+import { View } from "@react-pdf/renderer";
 
 type Props = LunaticComponentProps<"Table">;
 
 export function Table({ interpret, label, body, header }: Props) {
+
+  const renderHeader = () => (
+    header && (
+      <PDFTr>
+        {header.map((col, x) => (
+          <PDFTd key={x} style={styles.th}>
+            {renderContent(interpret, col.label, styles.headerText)}
+          </PDFTd>
+        ))}
+      </PDFTr>
+    )
+  );
   return (
     <ValueWithLabel interpret={interpret} label={label}>
-      <PDFTable style={styles.table}>
-        {header && (
-          <PDFTr>
-            {header.map((col, x) => (
-              <PDFTd key={x} style={styles.th}>
-                {renderContent(interpret, col.label, styles.headerText)}
-              </PDFTd>
-            ))}
-          </PDFTr>
-        )}
-        {body.map((row, y) => (
-          <PDFTr key={y}>
-            {row.map((col, x) => (
-              <PDFTd key={x} style={styles.td}>
-                {"componentType" in col ? (
-                  <ErrorBoundary
-                    fallback={<article>Error {col.componentType}</article>}
-                    key={x}
-                  >
-                    <LunaticComponent interpret={interpret} component={col} />
-                  </ErrorBoundary>
-                ) : (
-                  renderContent(interpret, col.label, styles.answer)
-                )}
-              </PDFTd>
-            ))}
-          </PDFTr>
-        ))}
-      </PDFTable>
+      <View wrap>
+        <PDFTable style={styles.table}>
+          {renderHeader()}
+          {body.map((row, y) => (
+            <PDFTr key={y} wrap={false}>
+              {row.map((col, x) => (
+                <PDFTd key={x} style={styles.td}>
+                  {"componentType" in col ? (
+                    <ErrorBoundary
+                      fallback={<article>Error {col.componentType}</article>}
+                      key={x}
+                    >
+                      <LunaticComponent interpret={interpret} component={col} />
+                    </ErrorBoundary>
+                  ) : (
+                    renderContent(interpret, col.label, styles.answer)
+                  )}
+                </PDFTd>
+              ))}
+            </PDFTr>
+          ))}
+        </PDFTable>
+      </View>
     </ValueWithLabel>
   );
 }

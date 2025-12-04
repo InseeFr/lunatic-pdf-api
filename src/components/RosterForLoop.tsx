@@ -2,6 +2,7 @@ import type { LunaticComponentProps } from "../types";
 import { ValueWithLabel } from "./ValueWithLabel";
 import { decorateInterpretIteration } from "../utils/vtl";
 import { LunaticComponent } from "./LunaticComponent";
+import { View } from "@react-pdf/renderer";
 import { Table, TR as PDFTr, TD as PDFTd } from "@ag-media/react-pdf-table";
 import { styles } from "./styles";
 import { renderContent } from "../utils/markdownParser";
@@ -27,36 +28,43 @@ export function RosterForLoop({
     return "Expected an array for the value of the first component";
   }
   const iterations = firstComponentValue.length;
+
+  const renderHeader = () => (
+    header && (
+      <PDFTr>
+        {header.map((col, x) => (
+          <PDFTd key={x} style={styles.th}>
+            {renderContent(interpret, col.label, styles.headerText)}
+          </PDFTd>
+        ))}
+      </PDFTr>
+    )
+  );
+
   return (
     <ValueWithLabel interpret={interpret} label={label}>
-      <Table style={styles.table}>
-        {header && (
-          <PDFTr>
-            {header.map((col, x) => (
-              <PDFTd key={x} style={styles.th}>
-                {renderContent(interpret, col.label, styles.headerText)}
-              </PDFTd>
-            ))}
-          </PDFTr>
-        )}
-        {Array.from({ length: iterations }).map((_, k) => {
-          const interpretAtIteration = decorateInterpretIteration(interpret, [
-            k,
-          ]);
-          return (
-            <PDFTr key={k}>
-              {components.map((component, j) => (
-                <PDFTd key={j} style={styles.td}>
-                  <LunaticComponent
-                    component={component}
-                    interpret={interpretAtIteration}
-                  />
-                </PDFTd>
-              ))}
-            </PDFTr>
-          );
-        })}
-      </Table>
+      <View wrap>
+        <Table style={styles.table}>
+          {renderHeader()}
+          {Array.from({ length: iterations }).map((_, k) => {
+            const interpretAtIteration = decorateInterpretIteration(interpret, [
+              k,
+            ]);
+            return (
+              <PDFTr key={k} wrap={false}>
+                {components.map((component, j) => (
+                  <PDFTd key={j} style={styles.td}>
+                    <LunaticComponent
+                      component={component}
+                      interpret={interpretAtIteration}
+                    />
+                  </PDFTd>
+                ))}
+              </PDFTr>
+            );
+          })}
+        </Table>
+      </View>
     </ValueWithLabel>
   );
 }
