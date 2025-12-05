@@ -13,7 +13,7 @@ export function Suggester({ interpret, label, response, storeName }: Props) {
 
   // Get label from cache 
   // TODO: handle missing nomenclature (async fetch if not in cache) not currently handled if the fetching somehow fails
-  const nomenclatureLabel = storeName
+  const nomenclatureLabel = storeName && collectedValue
     ? nomenclatureCache.getLabelFromCache(storeName, collectedValue)
     : undefined;
 

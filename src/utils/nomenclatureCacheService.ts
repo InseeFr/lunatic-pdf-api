@@ -1,7 +1,7 @@
 import { Nomenclature, NomenclatureItem } from "../models/nomenclature";
 
 class NomenclatureCacheService {
-    private cache: Map<string, NomenclatureItem[]> = new Map();
+    readonly cache: Map<string, NomenclatureItem[]> = new Map();
 
     /**
      * Set one nomenclature items in cache

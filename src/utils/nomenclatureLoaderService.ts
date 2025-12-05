@@ -2,7 +2,7 @@ import { Nomenclature, NomenclatureItem } from "../models/nomenclature";
 import { nomenclatureCache } from "./nomenclatureCacheService";
 
 class NomenclatureLoaderService {
-    private fetchPromises: Map<string, Promise<NomenclatureItem[]>> = new Map();
+    readonly fetchPromises: Map<string, Promise<NomenclatureItem[]>> = new Map();
 
     /**
      * Get nomenclature items by storeName
