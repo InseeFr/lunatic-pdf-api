@@ -3,7 +3,7 @@ import { ValueWithLabel } from "./ValueWithLabel";
 import { decorateInterpretIteration } from "../utils/vtl";
 import { LunaticComponent } from "./LunaticComponent";
 import { View } from "@react-pdf/renderer";
-import { Table, TR as PDFTr, TD as PDFTd } from "@ag-media/react-pdf-table";
+import { Table, TR as PDFTr, TD as PDFTd, TH as PDFTh } from "@ag-media/react-pdf-table";
 import { styles } from "./styles";
 import { renderContent } from "../utils/markdownParser";
 
@@ -31,20 +31,20 @@ export function RosterForLoop({
 
   const renderHeader = () => (
     header && (
-      <PDFTr>
+      <PDFTh fixed>
         {header.map((col, x) => (
           <PDFTd key={x} style={styles.th}>
             {renderContent(interpret, col.label, styles.headerText)}
           </PDFTd>
         ))}
-      </PDFTr>
+      </PDFTh>
     )
   );
 
   return (
     <ValueWithLabel interpret={interpret} label={label}>
       <View wrap>
-        <Table style={styles.table}>
+        <Table style={styles.table} >
           {renderHeader()}
           {Array.from({ length: iterations }).map((_, k) => {
             const interpretAtIteration = decorateInterpretIteration(interpret, [

@@ -7,6 +7,7 @@ import {
   Table as PDFTable,
   TR as PDFTr,
   TD as PDFTd,
+  TH as PDFTh
 } from "@ag-media/react-pdf-table";
 import { styles } from "./styles";
 import { renderContent } from "../utils/markdownParser";
@@ -18,13 +19,13 @@ export function Table({ interpret, label, body, header }: Props) {
 
   const renderHeader = () => (
     header && (
-      <PDFTr>
+      <PDFTh fixed>
         {header.map((col, x) => (
           <PDFTd key={x} style={styles.th}>
             {renderContent(interpret, col.label, styles.headerText)}
           </PDFTd>
         ))}
-      </PDFTr>
+      </PDFTh>
     )
   );
   return (
