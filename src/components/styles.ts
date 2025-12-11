@@ -13,8 +13,8 @@ export const depth = { current: 1 as 1 | 2 };
 
 export const styles = {
 	page: {
-		paddingVertical: rem(),
-		paddingHorizontal: rem(2),
+		paddingVertical: rem(1),
+		paddingHorizontal: rem(1),
 		// fontFamily: 'Geist',
 	},
 	h1: {
@@ -55,22 +55,22 @@ export const styles = {
 	},
 	answer: {
 		color: colors.muted,
-		fontSize: rem(0.75),
+		fontSize: rem(0.7),
 		lineHeight: 1.25,
 	},
 	strong: {
-		fontSize: rem(0.75),
+		fontSize: rem(0.7),
 		lineHeight: 1.2,
 		fontWeight: 'bold',
 	},
 	emphasis: {
-		fontSize: rem(0.75),
+		fontSize: rem(0.7),
 		fontStyle: 'italic',
 	},
 	label: {
 		color: colors.foreground,
 		fontWeight: 'semibold',
-		fontSize: rem(0.75),
+		fontSize: rem(0.7),
 		lineHeight: 1.2,
 		marginBottom: rem(0.25),
 	},
@@ -97,6 +97,7 @@ export const styles = {
 	},
 	table: {
 		marginBottom: rem(1),
+		marginTop: rem(0.5),
 	},
 	list: {
 		marginBottom: rem(1),
