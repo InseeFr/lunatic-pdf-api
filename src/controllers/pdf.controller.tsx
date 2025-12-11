@@ -5,6 +5,8 @@ import { LunaticQuestionnaire } from "../components/LunaticQuestionnaire";
 import config from "../config/config";
 import { ErrorCode, errorResponse } from "../error/api";
 import { logger } from "../logger";
+import { nomenclatureCache } from "../utils/nomenclatureCacheService";
+import { nomenclatureLoaderService } from "../utils/NomenclatureLoaderService";
 
 const { trustUriDomains } = config;
 
@@ -29,6 +31,7 @@ const isUriAuthorized = (uri: string): boolean => {
 export const generatePdf = async (req: Request, res: Response) => {
   const data = req.body as { data: LunaticData };
   let sourceUri = req.query.source as string;
+  const nomenclatureSourceUri = config.nomenclatureSourceUri || sourceUri;
 
   logger.info(`Generating PDF (source=${sourceUri ?? "none"})`);
 
@@ -81,6 +84,33 @@ export const generatePdf = async (req: Request, res: Response) => {
       { error: e instanceof Error ? e.message : e }
     );
   }
+
+  //TODO: check if there is a better place to check for nomenclatureStores
+  const nomenclatureStores = new Set<string>();
+  const findSuggesters = (components: any[]): void => {
+    components.forEach(component => {
+      if (component.componentType === "Suggester" && component.storeName) {
+        nomenclatureStores.add(component.storeName);
+      }
+      if (component.components && Array.isArray(component.components)) {
+        findSuggesters(component.components);
+      }
+    });
+  };
+
+  findSuggesters(source.components);
+
+  // Fetch and cache all nomenclatures
+  await Promise.all(
+    Array.from(nomenclatureStores).map(async storeName => {
+      const items = await nomenclatureLoaderService.getNomenclatures(
+        storeName,
+        nomenclatureSourceUri
+      );
+      nomenclatureCache.setNomenclature(storeName, items);
+    })
+  );
+
   try {
     const pdfResult = await renderToStream(
       <LunaticQuestionnaire source={source} data={data.data} />
@@ -106,5 +136,7 @@ export const generatePdf = async (req: Request, res: Response) => {
       500,
       { error: e instanceof Error ? e.message : e }
     );
+  } finally {
+    nomenclatureCache.clear();
   }
 };

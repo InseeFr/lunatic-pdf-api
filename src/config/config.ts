@@ -10,6 +10,7 @@ interface Config {
     oidcEnabled: boolean,
     oidcIssuer: string,
     isProd: boolean,
+    nomenclatureSourceUri: string,
 }
 
 const config: Config = {
@@ -20,6 +21,7 @@ const config: Config = {
     oidcEnabled: process.env.OIDC_ENABLED === "true",
     oidcIssuer: process.env.OIDC_ISSUER || "",
     isProd: process.env.NODE_ENV === "production",
+    nomenclatureSourceUri: process.env.NOMENCLATURE_SOURCE_URI || "",
 };
 
 export default config;
