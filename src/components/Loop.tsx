@@ -41,13 +41,13 @@ export function Loop({
       {Array.from({ length: getNbRows() }).map((_, k) => {
         const interpretAtIteration = decorateInterpretIteration(interpret, [k]);
         return (
-          <View key={`${id}-${k}`}>
+          <View key={`${id}-${k}`} wrap>
             <Text style={styles.h3}>Iteration #{k + 1}</Text>
             <LunaticComponents
               components={components}
               interpret={interpretAtIteration}
             />
-          </View>
+          </View >
         );
       })}
     </>
