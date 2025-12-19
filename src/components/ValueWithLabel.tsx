@@ -24,7 +24,7 @@ export function ValueWithLabel({ interpret, label, children }: Props) {
     );
   }
   return (
-    <View style={[styles.question, styles.question1]} wrap={false}>
+    <View style={[styles.question, styles.question1]} wrap={true}>
       {renderContent(interpret, label, styles.label)}
       {children}
     </View>

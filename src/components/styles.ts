@@ -13,8 +13,8 @@ export const depth = { current: 1 as 1 | 2 };
 
 export const styles = {
 	page: {
-		paddingVertical: rem(),
-		paddingHorizontal: rem(2),
+		paddingVertical: rem(1),
+		paddingHorizontal: rem(1),
 		// fontFamily: 'Geist',
 	},
 	h1: {
@@ -22,21 +22,21 @@ export const styles = {
 		fontWeight: 'semibold',
 		fontSize: rem(1.1),
 		lineHeight: 1.3,
-		marginTop: rem(1),
-		marginBottom: rem(1),
+		marginTop: rem(0.8),
+		marginBottom: rem(0.5),
 	},
 	h2: {
 		color: colors.foreground,
 		fontWeight: 'semibold',
-		fontSize: rem(1),
-		marginBottom: rem(1),
+		fontSize: rem(0.7),
+		marginBottom: rem(0.5),
 	},
 	h3: {
 		color: colors.foreground,
 		fontWeight: 'semibold',
 		fontSize: rem(0.9),
-		marginTop: rem(1.2),
-		marginBottom: rem(1),
+		marginTop: rem(1),
+		marginBottom: rem(0.5),
 	},
 	question: {
 		marginBottom: rem(0.5),
@@ -46,7 +46,7 @@ export const styles = {
 		borderLeftWidth: 1,
 		borderLeftStyle: 'solid',
 		borderLeftColor: colors.border,
-		marginBottom: rem(1),
+		marginBottom: rem(0.5),
 	},
 	paragraph: {
 		marginBottom: 10,
@@ -55,22 +55,22 @@ export const styles = {
 	},
 	answer: {
 		color: colors.muted,
-		fontSize: rem(0.75),
+		fontSize: rem(0.7),
 		lineHeight: 1.25,
 	},
 	strong: {
-		fontSize: rem(0.75),
-		lineHeight: 1.25,
+		fontSize: rem(0.7),
+		lineHeight: 1.2,
 		fontWeight: 'bold',
 	},
 	emphasis: {
-		fontSize: rem(0.75),
+		fontSize: rem(0.7),
 		fontStyle: 'italic',
 	},
 	label: {
 		color: colors.foreground,
 		fontWeight: 'semibold',
-		fontSize: rem(0.75),
+		fontSize: rem(0.7),
 		lineHeight: 1.2,
 		marginBottom: rem(0.25),
 	},
@@ -78,7 +78,7 @@ export const styles = {
 		color: 'red',
 	},
 	td: {
-		padding: rem(0.2),
+		padding: rem(0.25),
 	},
 	th: {
 		backgroundColor: '#f0f0f0',
@@ -97,10 +97,11 @@ export const styles = {
 	},
 	table: {
 		marginBottom: rem(1),
+		marginTop: rem(0.5),
 	},
 	list: {
-		marginBottom: 10,
-		marginLeft: 20,
+		marginBottom: rem(1),
+		marginLeft: rem(2),
 	},
 	link: {
 		//color: colors.link,

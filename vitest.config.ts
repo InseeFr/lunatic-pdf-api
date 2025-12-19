@@ -10,6 +10,9 @@ export default defineConfig({
         include: ['src/**/*.{test,spec}.{ts,tsx}'],
         exclude: ['node_modules', 'dist'],
         css: true,
+        coverage: {
+            reporter: ['text', 'lcov'],
+        },
     },
     resolve: {
         alias: {
