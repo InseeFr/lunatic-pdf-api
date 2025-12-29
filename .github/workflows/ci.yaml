@@ -19,7 +19,7 @@ jobs:
       is_version_changed: ${{ steps.check.outputs.exists == 'false' }}
       is_pre_release: ${{ contains(steps.version.outputs.prop, '-rc' ) }}
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
       - id: version
         uses: notiz-dev/github-action-json-property@release
         with:
@@ -43,7 +43,7 @@ jobs:
     permissions:
       contents: write
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
         with:
           ref: ${{ github.ref }}
           fetch-depth: 0
@@ -87,7 +87,7 @@ jobs:
 
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
       - name: Publish to Docker Hub
         uses: elgohr/Publish-Docker-Github-Action@v5
         with:
