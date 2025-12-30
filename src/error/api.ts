@@ -24,18 +24,8 @@ export const handleError = (
   details?: unknown,
   error?: unknown
 ) => {
-  console.error(error);
+  if (error) console.error(error);
   logger.error(`${message} : ${JSON.stringify(details)}`);
-  return errorResponse(res, code, message, status, details);
-};
-
-export const errorResponse = (
-  res: Response,
-  code: ErrorCode,
-  message: string,
-  status = 500,
-  details?: unknown
-) => {
   return res.status(status).json({
     code,
     message,

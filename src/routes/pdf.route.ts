@@ -2,6 +2,10 @@ import express from "express";
 import multer from "multer";
 import { generatePdf as generatePdfWithUri } from "../controllers/pdf-source-uri.controller";
 import { generatePdf } from "../controllers/pdf-source-form-data.controller";
+import {
+  validatePdfFormDataRequest,
+  validatePdfUriRequest,
+} from "../middleware/validate-pdf-request";
 
 const pdfRouter = express.Router();
 
@@ -54,7 +58,11 @@ const upload = multer({
  *       '500':
  *         description: Internal server error during PDF generation
  */
-pdfRouter.post("/generate-from-source", generatePdfWithUri);
+pdfRouter.post(
+  "/generate-from-source",
+  validatePdfUriRequest,
+  generatePdfWithUri
+);
 
 /**
  * @swagger
@@ -107,6 +115,7 @@ pdfRouter.post(
     { name: "source", maxCount: 1 },
     { name: "data", maxCount: 1 },
   ]),
+  validatePdfFormDataRequest,
   generatePdf
 );
 export default pdfRouter;

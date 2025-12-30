@@ -7,7 +7,6 @@ interface Config {
   appScheme: string;
   appHost: string;
   trustUriDomains: string[];
-  schemesList: string[];
   oidcEnabled: boolean;
   oidcIssuer: string;
   isProd: boolean;
@@ -18,7 +17,6 @@ const config: Config = {
   appScheme: process.env.APPLICATION_SCHEME || "http",
   appHost: process.env.APPLICATION_HOST || "localhost",
   trustUriDomains: (process.env.TRUST_URI_DOMAINS || "localhost").split(","),
-  schemesList: ["http:", "https:"],
   oidcEnabled: process.env.OIDC_ENABLED === "true",
   oidcIssuer: process.env.OIDC_ISSUER || "",
   isProd: process.env.NODE_ENV === "production",

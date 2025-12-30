@@ -3,24 +3,16 @@ import type { LunaticSource } from "@inseefr/lunatic";
 import { ErrorCode, handleError } from "../error/api";
 import { readAndValidateLunaticData } from "../services/data-service";
 import { generatePdfStream } from "../services/pdf-service";
+import { PdfRequestFromFormData } from "../types";
 
 export const generatePdf = async (req: Request, res: Response) => {
-  const sourceFile = (req.files as { source?: Express.Multer.File[] })
-    .source?.[0];
-  const dataFile = (req.files as { data?: Express.Multer.File[] }).data?.[0];
+  const sourceFile = (req as PdfRequestFromFormData).files.source[0];
+  const dataFile = (req as PdfRequestFromFormData).files.data[0];
 
-  if (!sourceFile || !dataFile) {
-    return handleError(
-      res,
-      ErrorCode.INVALID_URI,
-      "Missing source file or data file ",
-      400
-    );
-  }
   try {
-    const source = JSON.parse(
+    const source: LunaticSource = JSON.parse(
       sourceFile.buffer.toString("utf-8")
-    ) as LunaticSource;
+    );
 
     const data = readAndValidateLunaticData(
       res,

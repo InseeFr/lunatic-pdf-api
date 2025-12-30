@@ -1,42 +1,29 @@
 import type { LunaticSource } from "@inseefr/lunatic";
-import { Request, Response } from "express";
-import config from "../config/config";
+import { Response } from "express";
 import { ErrorCode, handleError } from "../error/api";
 import { logger } from "../logger";
 import { readAndValidateLunaticData } from "../services/data-service";
 import { generatePdfStream } from "../services/pdf-service";
+import config from "../config/config";
+import { PdfRequestFromUri } from "../types";
 
-const { trustUriDomains, schemesList } = config;
+const { trustUriDomains } = config;
+
+const schemesList = new Set(["https:", "http:"]);
 
 const isUriAuthorized = (uri: URL): boolean => {
   return (
-    schemesList.includes(uri.protocol) &&
+    schemesList.has(uri.protocol) &&
     trustUriDomains.some((trustDomain) => uri.hostname.endsWith(trustDomain))
   );
 };
 
-export const generatePdf = async (req: Request, res: Response) => {
-  let sourceUri = req.query.source as string;
+export const generatePdf = async (req: PdfRequestFromUri, res: Response) => {
+  const sourceUri = req.query.source as string;
 
   logger.info(`Generating PDF (source=${sourceUri ?? "none"})`);
 
-  if (!sourceUri) {
-    return handleError(res, ErrorCode.INVALID_URI, "Missing source URI", 400);
-  }
-
-  let url: URL;
-  try {
-    url = new URL(sourceUri);
-  } catch (e) {
-    return handleError(
-      res,
-      ErrorCode.INVALID_URI,
-      "The provided URI is invalid.",
-      400,
-      { uri: sourceUri },
-      { error: e instanceof Error ? e.message : e }
-    );
-  }
+  const url = new URL(sourceUri);
 
   if (!isUriAuthorized(url)) {
     return handleError(
