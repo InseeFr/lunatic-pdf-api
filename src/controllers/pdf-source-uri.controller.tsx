@@ -1,25 +1,12 @@
 import { renderToStream } from "@react-pdf/renderer";
-import { Request, Response } from "express";
 import type { LunaticData, LunaticSource } from "@inseefr/lunatic";
+import { Request, Response } from "express";
 import { LunaticQuestionnaire } from "../components/LunaticQuestionnaire";
 import config from "../config/config";
-import { ErrorCode, errorResponse } from "../error/api";
+import { ErrorCode, handleError } from "../error/api";
 import { logger } from "../logger";
 
 const { trustUriDomains } = config;
-
-const handleError = (
-  res: Response,
-  code: ErrorCode,
-  message: string,
-  status = 500,
-  details?: unknown,
-  error?: unknown
-) => {
-  console.error(error);
-  logger.error(message);
-  return errorResponse(res, code, message, status, details);
-};
 
 const isUriAuthorized = (uri: string): boolean => {
   const url = new URL(uri);
@@ -64,7 +51,7 @@ export const generatePdf = async (req: Request, res: Response) => {
   try {
     const responseSource = await fetch(sourceUri);
     if (!responseSource.ok) {
-      return errorResponse(
+      return handleError(
         res,
         ErrorCode.SOURCE_FETCH_ERROR,
         "Failed to fetch the source.",
@@ -78,7 +65,8 @@ export const generatePdf = async (req: Request, res: Response) => {
       ErrorCode.SOURCE_FETCH_ERROR,
       "An error occurred while fetching the source.",
       500,
-      { error: e instanceof Error ? e.message : e }
+      { error: e instanceof Error ? e.message : e },
+      e
     );
   }
   try {
@@ -89,22 +77,24 @@ export const generatePdf = async (req: Request, res: Response) => {
     res.setHeader("Content-Disposition", `attachment; filename=export.pdf`);
     pdfResult.pipe(res);
     pdfResult.on("error", (err) => {
-      errorResponse(
+      return handleError(
         res,
         ErrorCode.PDF_GENERATION_ERROR,
         "Failed to generate PDF.",
         500,
-        { error: err }
+        { error: err instanceof Error ? err.message : err },
+        err
       );
     });
     logger.info("PDF successfully generated");
   } catch (e) {
-    return errorResponse(
+    return handleError(
       res,
       ErrorCode.PDF_GENERATION_ERROR,
       "Failed to generate PDF.",
       500,
-      { error: e instanceof Error ? e.message : e }
+      { error: e instanceof Error ? e.message : e },
+      e
     );
   }
 };
