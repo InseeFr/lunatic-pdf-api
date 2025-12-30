@@ -1,5 +1,5 @@
 import express from 'express';
-import { generatePdf } from '../controllers/pdf.controller';
+import { generatePdf as generatePdfWithUri } from '../controllers/pdf-source-uri.controller';
 
 const pdfRouter = express.Router();
 
@@ -66,6 +66,6 @@ const pdfRouter = express.Router();
  *       '500':
  *         description: Internal server error during PDF generation
  */
-pdfRouter.post('/generate-from-source', generatePdf);
+pdfRouter.post('/generate-from-source', generatePdfWithUri);
 
 export default pdfRouter;
