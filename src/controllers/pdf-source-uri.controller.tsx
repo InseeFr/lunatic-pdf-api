@@ -15,7 +15,6 @@ const isUriAuthorized = (uri: string): boolean => {
 };
 
 export const generatePdf = async (req: Request, res: Response) => {
-  const data = readLunaticData(req.body);
   let sourceUri = req.query.source as string;
 
   logger.info(`Generating PDF (source=${sourceUri ?? "none"})`);
@@ -71,6 +70,7 @@ export const generatePdf = async (req: Request, res: Response) => {
     );
   }
   try {
+    const data = readLunaticData(req.body);
     const pdfResult = await renderToStream(
       <LunaticQuestionnaire source={source} data={data} />
     );
