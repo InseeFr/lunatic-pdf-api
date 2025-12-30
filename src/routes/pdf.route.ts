@@ -1,7 +1,7 @@
 import express from "express";
 import multer from "multer";
 import { generatePdf as generatePdfWithUri } from "../controllers/pdf-source-uri.controller";
-import { generatePdf } from "../controllers/pdf-source-form-data";
+import { generatePdf } from "../controllers/pdf-source-form-data.controller";
 
 const pdfRouter = express.Router();
 
