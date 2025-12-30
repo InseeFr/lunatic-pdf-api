@@ -7,11 +7,13 @@ import { ErrorCode, handleError } from "../error/api";
 import { logger } from "../logger";
 import { readLunaticData } from "../utils/readLunaticData";
 
-const { trustUriDomains } = config;
+const { trustUriDomains, schemesList } = config;
 
-const isUriAuthorized = (uri: string): boolean => {
-  const url = new URL(uri);
-  return trustUriDomains.some((trustDomain) => url.host.endsWith(trustDomain));
+const isUriAuthorized = (uri: URL): boolean => {
+  return (
+    schemesList.includes(uri.protocol) &&
+    trustUriDomains.some((trustDomain) => uri.hostname.endsWith(trustDomain))
+  );
 };
 
 export const generatePdf = async (req: Request, res: Response) => {
@@ -37,7 +39,7 @@ export const generatePdf = async (req: Request, res: Response) => {
     );
   }
 
-  if (!isUriAuthorized(url.toString())) {
+  if (!isUriAuthorized(url)) {
     return handleError(
       res,
       ErrorCode.UNAUTHORIZED_HOST,
@@ -49,7 +51,7 @@ export const generatePdf = async (req: Request, res: Response) => {
 
   let source: LunaticSource;
   try {
-    const responseSource = await fetch(sourceUri);
+    const responseSource = await fetch(url);
     if (!responseSource.ok) {
       return handleError(
         res,

@@ -1,6 +1,6 @@
 import { renderToStream } from "@react-pdf/renderer";
 import { Request, Response } from "express";
-import type { LunaticData, LunaticSource } from "@inseefr/lunatic";
+import type { LunaticSource } from "@inseefr/lunatic";
 import { LunaticQuestionnaire } from "../components/LunaticQuestionnaire";
 import { ErrorCode, handleError } from "../error/api";
 import { logger } from "../logger";

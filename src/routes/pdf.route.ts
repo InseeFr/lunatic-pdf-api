@@ -5,7 +5,10 @@ import { generatePdf } from "../controllers/pdf-source-form-data.controller";
 
 const pdfRouter = express.Router();
 
-const upload = multer({ storage: multer.memoryStorage() });
+const upload = multer({
+  storage: multer.memoryStorage(),
+  limits: { fileSize: 8_000_000 /* 8MB */ },
+});
 
 /**
  * @swagger
