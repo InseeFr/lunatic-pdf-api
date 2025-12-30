@@ -4,6 +4,7 @@ import type { LunaticData, LunaticSource } from "@inseefr/lunatic";
 import { LunaticQuestionnaire } from "../components/LunaticQuestionnaire";
 import { ErrorCode, handleError } from "../error/api";
 import { logger } from "../logger";
+import { readLunaticData } from "../utils/readLunaticData";
 
 export const generatePdf = async (req: Request, res: Response) => {
   const sourceFile = (req.files as { source?: Express.Multer.File[] })
@@ -23,7 +24,7 @@ export const generatePdf = async (req: Request, res: Response) => {
       sourceFile.buffer.toString("utf-8")
     ) as LunaticSource;
 
-    const data = JSON.parse(dataFile.buffer.toString("utf-8")) as LunaticData;
+    const data = readLunaticData(JSON.parse(dataFile.buffer.toString("utf-8")));
 
     const pdfResult = await renderToStream(
       <LunaticQuestionnaire source={source} data={data} />

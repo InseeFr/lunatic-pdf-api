@@ -1,10 +1,11 @@
 import { renderToStream } from "@react-pdf/renderer";
-import type { LunaticData, LunaticSource } from "@inseefr/lunatic";
+import type { LunaticSource } from "@inseefr/lunatic";
 import { Request, Response } from "express";
 import { LunaticQuestionnaire } from "../components/LunaticQuestionnaire";
 import config from "../config/config";
 import { ErrorCode, handleError } from "../error/api";
 import { logger } from "../logger";
+import { readLunaticData } from "../utils/readLunaticData";
 
 const { trustUriDomains } = config;
 
@@ -14,7 +15,7 @@ const isUriAuthorized = (uri: string): boolean => {
 };
 
 export const generatePdf = async (req: Request, res: Response) => {
-  const data = req.body as { data: LunaticData };
+  const data = readLunaticData(req.body);
   let sourceUri = req.query.source as string;
 
   logger.info(`Generating PDF (source=${sourceUri ?? "none"})`);
@@ -71,7 +72,7 @@ export const generatePdf = async (req: Request, res: Response) => {
   }
   try {
     const pdfResult = await renderToStream(
-      <LunaticQuestionnaire source={source} data={data.data} />
+      <LunaticQuestionnaire source={source} data={data} />
     );
     res.setHeader("Content-Type", "application/pdf");
     res.setHeader("Content-Disposition", `attachment; filename=export.pdf`);

@@ -16,8 +16,8 @@ const upload = multer({ storage: multer.memoryStorage() });
  *     summary: Generate a PDF from a source as URI and provided data in body of request
  *     description: |
  *       This endpoint generates a PDF based on:
- *       - A **source** (the Lunatic questionnaire URL) provided as a query parameter. (ex URI from Registry-Api )
- *       - Data provided in the request body (JSON format).
+ *       - a **source** (the Lunatic questionnaire URL) provided as a query parameter. (ex URI from Registry-Api )
+ *       - a Lunatic **data** provided in the request body (JSON format, can be object included the key _data_ that includes Lunatic Data, or LunaticData directly).
  *
  *       The PDF is returned as a binary file with the header `Content-Disposition: attachment; filename=export.pdf`.
  *     parameters:
@@ -37,26 +37,7 @@ const upload = multer({ storage: multer.memoryStorage() });
  *             type: object
  *             additionalProperties: true
  *             description: |
- *               The exact structure depends on your implementation, but should include:
  *               - `data` (object): Questionnaire data
- *               - `stateData` (object): State information
- *             properties:
- *               data:
- *                 type: object
- *                 description: Questionnaire data from Lunatic
- *               stateData:
- *                 type: object
- *                 properties:
- *                   state:
- *                     type: string
- *                     enum: [INIT, VALIDATED, COMPLETED]
- *                     description: Current status of the questionnaire
- *                   date:
- *                     type: number
- *                     description: Timestamp in milliseconds
- *                   currentPage:
- *                     type: string
- *                     description: Current page of the questionnaire
  *     responses:
  *       '200':
  *         description: Returns a PDF file
