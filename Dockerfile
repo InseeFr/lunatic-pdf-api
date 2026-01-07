@@ -1,4 +1,4 @@
-FROM node:24.11.0-alpine3.22 AS build
+FROM node:24.12.0-alpine3.22 AS build
 COPY . /app
 WORKDIR /app
 
@@ -7,7 +7,7 @@ RUN npm install -g pnpm@latest-10
 RUN pnpm install
 RUN pnpm run build
 
-FROM node:24.11.0-alpine3.22 AS prod-deps
+FROM node:24.12.0-alpine3.22 AS prod-deps
 
 COPY . /app
 WORKDIR /app
@@ -16,7 +16,7 @@ RUN npm install -g pnpm@latest-10
 
 RUN pnpm install --prod
 
-FROM node:24.11.0-alpine3.22
+FROM node:24.12.0-alpine3.22
 
 ENV NODE_ENV=production
 
