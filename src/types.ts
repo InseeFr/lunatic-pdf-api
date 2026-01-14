@@ -1,4 +1,8 @@
-import type { LunaticComponentDefinition } from "@inseefr/lunatic";
+import type {
+  LunaticComponentDefinition,
+  LunaticData,
+  LunaticSource,
+} from "@inseefr/lunatic";
 import { Request } from "express";
 import type { ReactNode } from "react";
 
@@ -19,10 +23,11 @@ export interface PdfRequestFromUri extends Request {
   body: unknown;
 }
 
-// Interface pour les requêtes multipart/form-data
-export interface PdfRequestFromFormData extends Request {
-  files: {
-    source: Express.Multer.File[];
-    data: Express.Multer.File[];
+export interface PdfRequestFromBody extends Request {
+  body: {
+    source: LunaticSource;
+    interrogation: {
+      data: LunaticData;
+    };
   };
 }

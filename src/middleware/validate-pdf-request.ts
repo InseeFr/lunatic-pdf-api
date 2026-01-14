@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import { ErrorCode, handleError } from "../error/api";
-import { PdfRequestFromFormData } from "../types";
+import { PdfRequestFromBody } from "../types";
+import { logger } from "../logger";
 
 /**
  * Check if request has a valid sourceUrl as query param
@@ -36,18 +37,24 @@ export const validatePdfUriRequest = (
 };
 
 export const validatePdfFormDataRequest = (
-  req: Request,
+  req: PdfRequestFromBody,
   res: Response,
   next: NextFunction
 ) => {
-  const sourceFile = (req as PdfRequestFromFormData).files.source[0];
-  const dataFile = (req as PdfRequestFromFormData).files.data[0];
+  const requestBody = req.body;
+  if (!requestBody) {
+    return handleError(res, ErrorCode.INVALID_REQUEST, "Missing body", 400);
+  }
+  logger.info(requestBody.interrogation);
 
-  if (!sourceFile || !dataFile) {
+  const source = requestBody.source;
+  const interrogation = requestBody.interrogation;
+
+  if (!source || !interrogation) {
     return handleError(
       res,
       ErrorCode.INVALID_URI,
-      "Missing source file or data file ",
+      "Missing source or interrogation",
       400
     );
   }
