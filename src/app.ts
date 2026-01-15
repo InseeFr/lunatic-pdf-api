@@ -24,15 +24,7 @@ async function createServer() {
     // Initialize JWT middleware
     const jwtMiddleware = await initJwtMiddleware();
     // Apply JWT middlware for routes
-    app.use(
-      jwtMiddleware.unless({
-        path: [
-          /^\/api\/healthcheck/, // exclude all routes start with /api/healthcheck
-          /^\/api-docs/, // exclude swagger UI
-          "/", // exclude root (redirect to swagger-ui)
-        ],
-      })
-    );
+    app.use(jwtMiddleware);
     // handle JWT error
     app.use(jwtErrorHandler);
     // handle auth logging
