@@ -9,6 +9,7 @@ interface Config {
   trustUriDomains: string[];
   oidcEnabled: boolean;
   oidcIssuer: string;
+  jsonBodyLimit: string;
   isProd: boolean;
 }
 
@@ -19,6 +20,7 @@ const config: Config = {
   trustUriDomains: (process.env.TRUST_URI_DOMAINS || "localhost").split(","),
   oidcEnabled: process.env.OIDC_ENABLED === "true",
   oidcIssuer: process.env.OIDC_ISSUER || "",
+  jsonBodyLimit: process.env.API_BODY_SIZE_LIMIT || "1mb",
   isProd: process.env.NODE_ENV === "production",
 };
 
