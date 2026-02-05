@@ -45,8 +45,7 @@ export const validatePdfFormDataRequest = (
   if (!requestBody) {
     return handleError(res, ErrorCode.INVALID_REQUEST, "Missing body", 400);
   }
-  logger.info(requestBody.interrogation);
-
+  
   const source = requestBody.source;
   const interrogation = requestBody.interrogation;
 
