@@ -6,8 +6,8 @@ async function start() {
     try {
         const app = await createServer();
         const server = app.listen(config.port, () => {
-            logger.info(`Server is running on port ${config.port}`);
-            logger.info(`Server configuration ${JSON.stringify(config, null, '\t')}`);
+            logger.info(`server is running on port ${config.port}`);
+            logger.info(`server configuration: ${JSON.stringify(config)}`);
         });
 
         // Shutdown (SIGTERM/SIGINT) pour Kubernetes/Docker
@@ -26,7 +26,7 @@ async function start() {
         process.on("SIGINT", () => shutdown("SIGINT"));
     } catch (err) {
         console.error(err);
-        logger.error(`Failed to start server`);
+        logger.error(`failed to start server`);
         process.exit(1);
     }
 }

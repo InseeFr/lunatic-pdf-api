@@ -21,7 +21,7 @@ const isUriAuthorized = (uri: URL): boolean => {
 export const generatePdf = async (req: PdfRequestFromUri, res: Response) => {
   const sourceUri = req.query.source as string;
 
-  logger.info(`Generating PDF (source=${sourceUri ?? "none"})`);
+  logger.info(`generate PDF: (source=${sourceUri ?? "none"})`);
 
   const url = new URL(sourceUri);
 

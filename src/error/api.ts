@@ -26,7 +26,7 @@ export const handleError = (
   error?: unknown
 ) => {
   if (error) console.error(error);
-  logger.error(`${message} : ${JSON.stringify(details)}`);
+  logger.error(`${message}: ${JSON.stringify(details)}`);
   return res.status(status).json({
     code,
     message,

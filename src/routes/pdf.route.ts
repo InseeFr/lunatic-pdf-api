@@ -89,6 +89,22 @@ pdfRouter.post(
  *                required:
  *                  - data
  *                properties:
+ *                  interrogationId:
+ *                    type: string
+ *                    format: uuid
+ *                    description: string (uuid format) from collect information system
+ *                  usualSurveyUnitId:
+ *                    type: string
+ *                    description: string corresponding to business ID (SIRET/SIREN number)
+ *                    example: INSEE (Siret 98767543210)
+ *                  collectionInstrumentId:
+ *                    type: string
+ *                    description: the id of collection instrument i.e ID of source use inside collect information system (can not be the same as source.id)
+ *                    example: EAP2026X00
+ *                  validationDate:
+ *                    type: string
+ *                    format: date-time
+ *                    description: the date of validation of the questionnaire (format iso, ex 2026-02-03T12:20:29.275709359Z)
  *                  data:
  *                    type: object
  *                    description: Lunatic data
