@@ -1,4 +1,4 @@
-import type { LunaticComponentProps } from "../types";
+import type { LunaticComponentProps } from "../models/types";
 import { ValueWithLabel } from "./ValueWithLabel";
 import { ErrorBoundary } from "react-error-boundary";
 import { LunaticComponent } from "./LunaticComponent";

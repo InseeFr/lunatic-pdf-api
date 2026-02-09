@@ -1,6 +1,6 @@
 import type { LunaticVariablesStore } from "@inseefr/lunatic";
 import type { ReactNode } from "react";
-import type { VTLExpression } from "../types";
+import type { VTLExpression } from "../models/types";
 
 export type Interpreter = ReturnType<typeof makeInterpret>;
 

@@ -1,5 +1,5 @@
 import { styles } from "./styles";
-import { LunaticComponentProps } from "../types";
+import { LunaticComponentProps } from "../models/types";
 import { renderContent } from "../utils/markdownParser";
 
 

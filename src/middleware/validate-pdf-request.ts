@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import { ErrorCode, handleError } from "../error/api";
-import { PdfRequestFromBody } from "../types";
+import { PdfRequestFromBody } from "../models/types";
 import { logger } from "../logger";
 
 /**
@@ -45,7 +45,7 @@ export const validatePdfFormDataRequest = (
   if (!requestBody) {
     return handleError(res, ErrorCode.INVALID_REQUEST, "Missing body", 400);
   }
-  
+
   const source = requestBody.source;
   const interrogation = requestBody.interrogation;
 
