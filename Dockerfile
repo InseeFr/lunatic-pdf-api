@@ -24,13 +24,10 @@ COPY --from=prod-deps /app/node_modules /app/node_modules
 COPY --from=build /app/dist /app/dist
 COPY --from=build /app/package.json /app/package.json
 
-ENV NODE_UID=10001
-ENV NODE_USER=nodeuser
-
-RUN addgroup -g ${NODE_UID} ${NODE_USER} && \
-    adduser -D -u ${NODE_UID} -G ${NODE_USER} ${NODE_USER}
-
-USER ${NODE_UID}
+ENV NODEJS_USER_ID=1000
+ENV NODEJS_GROUP_ID=1000
+ENV NODEJS_USER=NODEJS
+USER $NODEJS_USER_ID
 
 EXPOSE 8080
 
