@@ -2,8 +2,7 @@ import React from 'react';
 //import { PdfRequestFromBody } from '../models/types';
 import { Page, View, Text } from '@react-pdf/renderer';
 import { styles } from '../components/styles';
-import { LogoInsee } from './logoInsee';
-
+import { LogoInsee } from './LogoInsee';
 
 interface TitlePageProps {
     // Waiting for a proper mock json file
@@ -21,7 +20,7 @@ export const TitlePage: React.FC<TitlePageProps> = ({ data }) => {
         day: 'numeric',
     });
 
-    const surveyTitle = data.body.interrogation.collectionInstrumentId || "Titre du questionnaire";
+    const surveyTitle = data.body.interrogation.collectionInstrumentId || "N/A";
     const validationDate = data.body.interrogation.payload.validationDate ? new Date(data.body.interrogation.payload.validationDate).toLocaleDateString('fr-FR', {
         year: 'numeric',
         month: 'long',
@@ -29,9 +28,7 @@ export const TitlePage: React.FC<TitlePageProps> = ({ data }) => {
     })
         : null;
 
-    console.log('validationDate', data.body.interrogation.payload.validationDate)
-
-    const usualSurveyUnitId = data.body.interrogation.payload.usualSurveyUnitId || "ID de l'unité enquêtée";
+    const usualSurveyUnitId = data.body.interrogation.payload.usualSurveyUnitId ? data.body.interrogation.payload.usualSurveyUnitId : null;
 
 
     return (
@@ -57,14 +54,16 @@ export const TitlePage: React.FC<TitlePageProps> = ({ data }) => {
 
                         Données saisies pour {surveyTitle}
                     </Text>
-                    <View style={{ marginBottom: 25 }}>
-                        <Text style={styles.titleSubHeader}>
-                            Unité enquêtée
-                        </Text>
-                        <Text style={styles.titleLabel}>
-                            {usualSurveyUnitId}
-                        </Text>
-                    </View>
+                    {usualSurveyUnitId && (
+                        <View style={{ marginBottom: 25 }}>
+                            <Text style={styles.titleSubHeader}>
+                                Unité enquêtée
+                            </Text>
+                            <Text style={styles.titleLabel}>
+                                {usualSurveyUnitId}
+                            </Text>
+                        </View>
+                    )}
 
                     {validationDate && (
                         <View style={{ marginBottom: 25 }}>
