@@ -22,16 +22,19 @@ export const LunaticQuestionnaire = ({ source, data }: Props) => {
     () => LunaticVariablesStore.makeFromSource(source, data.body.interrogation.data),
     [source, data],
   );
+  const surveyTitle = data.body.interrogation.collectionInstrumentId;
+  const usualSurveyUnitId = data.body.interrogation.usualSurveyUnitId;
+  const validationDate = data.body.interrogation.validationDate;
   const interpret = useMemo(() => makeInterpret(store), [store]);
   return (
     <Document pageMode="useOutlines">
-      <TitlePage data={data} />
+      <TitlePage surveyTitle={surveyTitle} usualSurveyUnitId={usualSurveyUnitId} validationDate={validationDate} />
       <Page size="A4" style={styles.page}>
         <LunaticComponents
           components={source.components}
           interpret={interpret}
         />
-        <Footer data={data} />
+        <Footer surveyTitle={surveyTitle} usualSurveyUnitId={usualSurveyUnitId} />
       </Page>
     </Document>
   );

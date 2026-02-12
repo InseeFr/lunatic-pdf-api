@@ -1,45 +1,11 @@
 import type { Style } from '@react-pdf/stylesheet';
-import { Font } from '@react-pdf/renderer';
-import OpenSansRegular from '../assets/fonts/OpenSans/OpenSans-Regular.ttf';
-import OpenSansItalic from '../assets/fonts/OpenSans/OpenSans-Italic.ttf';
-import OpenSansSemiBold from '../assets/fonts/OpenSans/OpenSans-SemiBold.ttf';
-import OpenSansSemiBoldItalic from '../assets/fonts/OpenSans/OpenSans-SemiBoldItalic.ttf';
-import OpenSansBold from '../assets/fonts/OpenSans/OpenSans-Bold.ttf';
-import OpenSansBoldItalic from '../assets/fonts/OpenSans/OpenSans-BoldItalic.ttf';
-
-Font.register({
-	family: 'Open Sans',
-	fonts: [
-		{
-			src: OpenSansRegular,
-			fontWeight: 'normal',
-		},
-		{
-			src: OpenSansItalic,
-			fontWeight: 'normal',
-			fontStyle: 'italic',
-		},
-		{
-			src: OpenSansSemiBold,
-			fontWeight: 600,
-		},
-		{
-			src: OpenSansSemiBoldItalic,
-			fontWeight: 600,
-			fontStyle: 'italic',
-		},
-		{
-			src: OpenSansBold,
-			fontWeight: 'bold',
-		},
-		{
-			src: OpenSansBoldItalic,
-			fontWeight: 'bold',
-			fontStyle: 'italic',
-		},
-	],
-});
-
+// import { Font } from '@react-pdf/renderer';
+// import OpenSansRegular from '../assets/fonts/OpenSans/OpenSans-Regular.ttf?url';
+// import OpenSansItalic from '../assets/fonts/OpenSans/OpenSans-Italic.ttf?url';
+// import OpenSansSemiBold from '../assets/fonts/OpenSans/OpenSans-SemiBold.ttf?url';
+// import OpenSansSemiBoldItalic from '../assets/fonts/OpenSans/OpenSans-SemiBoldItalic.ttf?url';
+// import OpenSansBold from '../assets/fonts/OpenSans/OpenSans-Bold.ttf?url';
+// import OpenSansBoldItalic from '../assets/fonts/OpenSans/OpenSans-BoldItalic.ttf?url';
 
 const colors = {
 	foreground: '#0a0a0a',
@@ -57,8 +23,17 @@ export const styles = {
 	page: {
 		paddingTop: rem(1),
 		paddingBottom: rem(3),
-		paddingHorizontal: rem(1),
-		fontFamily: 'Open Sans',
+		paddingLeft: rem(1),
+		paddingRight: rem(1.5),
+		//fontFamily: 'Open Sans',
+	},
+	titleView: {
+		display: 'flex',
+		flexDirection: 'column',
+		justifyContent: 'center',
+		alignItems: 'center',
+		minHeight: '100%',
+		padding: 50
 	},
 	titleHeader: {
 		fontSize: 24,
@@ -186,3 +161,41 @@ export const styles = {
 	},
 
 } as Record<string, Style>;
+
+
+
+// Font registration is disabled because it works differently on preview mode and on server mode
+
+
+// Font.register({
+// 	family: 'Open Sans',
+// 	fonts: [
+// 		{
+// 			src: OpenSansRegular,
+// 			fontWeight: 'normal',
+// 		},
+// 		{
+// 			src: OpenSansItalic,
+// 			fontWeight: 'normal',
+// 			fontStyle: 'italic',
+// 		},
+// 		{
+// 			src: OpenSansSemiBold,
+// 			fontWeight: 600,
+// 		},
+// 		{
+// 			src: OpenSansSemiBoldItalic,
+// 			fontWeight: 600,
+// 			fontStyle: 'italic',
+// 		},
+// 		{
+// 			src: OpenSansBold,
+// 			fontWeight: 'bold',
+// 		},
+// 		{
+// 			src: OpenSansBoldItalic,
+// 			fontWeight: 'bold',
+// 			fontStyle: 'italic',
+// 		},
+// 	],
+// });

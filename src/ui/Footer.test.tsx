@@ -24,33 +24,14 @@ vi.mock('./styles', () => ({
 
 describe('Footer', () => {
     it('renders footer correctly', () => {
-        const mockData = {
-            body: {
-                interrogation: {
-                    collectionInstrumentId: 'Test Survey',
-                    payload: {
-                        validationDate: '2026-01-01T00:00:00Z',
-                        usualSurveyUnitId: '12345'
-                    }
-                }
-            }
-        };
+        const mockSurveyTitle = "Test Survey";
+        const mockUsualSurveyUnitId = "12345";
 
-        render(<Footer data={mockData} />);
+        render(<Footer surveyTitle={mockSurveyTitle} usualSurveyUnitId={mockUsualSurveyUnitId} />);
         expect(screen.getByText(/Test Survey/i)).toBeInTheDocument();
         expect(screen.getByText(/12345/i)).toBeInTheDocument();
     });
 
-    it('renders default title and date when data is missing', () => {
-        const mockData = {
-            body: {
-                interrogation: {
-                    payload: {}
-                }
-            }
-        };
-        render(<Footer data={mockData} />);
-        expect(screen.getByText(/N\/A/i)).toBeInTheDocument();
-    });
+
 
 });

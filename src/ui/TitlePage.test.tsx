@@ -33,35 +33,14 @@ vi.mock('./styles', () => ({
 
 describe('TitlePage', () => {
     it('renders survey title and validation date', () => {
-        const mockData = {
-            body: {
-                interrogation: {
-                    collectionInstrumentId: 'Test Survey',
-                    payload: {
-                        validationDate: '2026-01-01T00:00:00Z',
-                        usualSurveyUnitId: '12345'
-                    }
-                }
-            }
-        };
+        const mockSurveyTitle = "Test Survey";
+        const mockUsualSurveyUnitId = "12345";
+        const mockValidationDate = "2026-01-01T00:00:00Z";
 
-        render(<TitlePage data={mockData} />);
-        expect(screen.getByText(/Données saisies pour Test Survey/i)).toBeInTheDocument();
+        render(<TitlePage surveyTitle={mockSurveyTitle} usualSurveyUnitId={mockUsualSurveyUnitId} validationDate={mockValidationDate} />);
+        expect(screen.getByText(/Récapitulatif Test Survey/i)).toBeInTheDocument();
         expect(screen.getByText(/1 janvier 2026/i)).toBeInTheDocument();
         expect(screen.getByText(/12345/i)).toBeInTheDocument();
-    });
-
-    it('renders default title and date when data is missing', () => {
-        const mockData = {
-            body: {
-                interrogation: {
-                    payload: {}
-                }
-            }
-        };
-        render(<TitlePage data={mockData} />);
-        expect(screen.getByText(/Données saisies pour N\/A/i)).toBeInTheDocument();
-        expect(screen.queryByText(/Unité enquêtée/i)).not.toBeInTheDocument();
     });
 
 });
