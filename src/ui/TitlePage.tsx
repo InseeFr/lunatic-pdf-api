@@ -13,7 +13,6 @@ interface TitlePageProps {
 
 export const TitlePage: React.FC<TitlePageProps> = ({ data }) => {
 
-    console.log('TitlePage data', data)
     const currentDate = new Date().toLocaleDateString('fr-FR', {
         year: 'numeric',
         month: 'long',

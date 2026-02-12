@@ -55,7 +55,8 @@ export const depth = { current: 1 as 1 | 2 };
 
 export const styles = {
 	page: {
-		paddingVertical: rem(1),
+		paddingTop: rem(1),
+		paddingBottom: rem(3),
 		paddingHorizontal: rem(1),
 		fontFamily: 'Open Sans',
 	},
@@ -74,6 +75,23 @@ export const styles = {
 	titleLabel: {
 		fontSize: 12,
 		color: '#737373',
+	},
+	footerBar: {
+		position: 'absolute',
+		bottom: 33,
+		left: 10,
+		right: 10,
+		borderTopWidth: 1,
+		borderTopColor: '#000000',
+	},
+	footerContent: {
+		position: 'absolute',
+		bottom: 8,
+		left: 15,
+		right: 15,
+		flexDirection: 'row',
+		justifyContent: 'space-between',
+		alignItems: 'center',
 	},
 	h1: {
 		color: colors.foreground,
