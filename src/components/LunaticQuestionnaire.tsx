@@ -9,6 +9,7 @@ import { makeInterpret } from "../utils/vtl";
 import { LunaticComponents } from "./LunaticComponent";
 import { PdfRequestFromBody } from "../models/types";
 import TitlePage from "../ui/TitlePage";
+import Footer from "../ui/Footer";
 
 type Props = {
   source: LunaticSource;
@@ -16,6 +17,7 @@ type Props = {
 };
 // Create Document Component
 export const LunaticQuestionnaire = ({ source, data }: Props) => {
+  console.log("LunaticQuestionnaire data", data);
   const store = useMemo(
     () => LunaticVariablesStore.makeFromSource(source, data.body.interrogation.data),
     [source, data],
@@ -29,6 +31,7 @@ export const LunaticQuestionnaire = ({ source, data }: Props) => {
           components={source.components}
           interpret={interpret}
         />
+        <Footer data={data} />
       </Page>
     </Document>
   );
