@@ -3,14 +3,12 @@ import { View, Text } from '@react-pdf/renderer';
 import { styles } from '../components/styles';
 
 interface FooterProps {
-    data?: any;
+    surveyTitle: string;
+    usualSurveyUnitId: string;
 }
 
-export const Footer: React.FC<FooterProps> = ({ data }) => {
-    const surveyTitle = data?.body?.interrogation?.collectionInstrumentId ?? 'N/A';
-    const usualSurveyUnitId = data?.body?.interrogation?.payload?.usualSurveyUnitId ?? null;
+export const Footer: React.FC<FooterProps> = ({ surveyTitle, usualSurveyUnitId }) => {
     const currentDate = new Date().toLocaleDateString('fr-FR');
-
     return (
         <>
             <View

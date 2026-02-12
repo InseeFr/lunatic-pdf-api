@@ -5,13 +5,12 @@ import { styles } from '../components/styles';
 import { LogoInsee } from './LogoInsee';
 
 interface TitlePageProps {
-    // Waiting for a proper mock json file
-    // data: PdfRequestFromBody;
-
-    data: any;
+    surveyTitle: string;
+    usualSurveyUnitId: string;
+    validationDate: string;
 }
 
-export const TitlePage: React.FC<TitlePageProps> = ({ data }) => {
+export const TitlePage: React.FC<TitlePageProps> = ({ surveyTitle, usualSurveyUnitId, validationDate }) => {
 
     const currentDate = new Date().toLocaleDateString('fr-FR', {
         year: 'numeric',
@@ -19,27 +18,16 @@ export const TitlePage: React.FC<TitlePageProps> = ({ data }) => {
         day: 'numeric',
     });
 
-    const surveyTitle = data.body.interrogation.collectionInstrumentId || "N/A";
-    const validationDate = data.body.interrogation.payload.validationDate ? new Date(data.body.interrogation.payload.validationDate).toLocaleDateString('fr-FR', {
+    const formattedValidationDate = new Date(validationDate).toLocaleDateString('fr-FR', {
         year: 'numeric',
         month: 'long',
         day: 'numeric',
-    })
-        : null;
-
-    const usualSurveyUnitId = data.body.interrogation.payload.usualSurveyUnitId ? data.body.interrogation.payload.usualSurveyUnitId : null;
+    });
 
 
     return (
         <Page size="A4" style={styles.page}>
-            <View style={{
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'center',
-                alignItems: 'center',
-                minHeight: '100%',
-                padding: 40
-            }}>
+            <View style={styles.titleView}>
                 <View style={{ marginBottom: 20 }}>
                     <LogoInsee />
                 </View>
@@ -51,30 +39,26 @@ export const TitlePage: React.FC<TitlePageProps> = ({ data }) => {
                 }}>
                     <Text style={styles.titleHeader}>
 
-                        Données saisies pour {surveyTitle}
+                        Récapitulatif {surveyTitle}
                     </Text>
-                    {usualSurveyUnitId && (
-                        <View style={{ marginBottom: 25 }}>
-                            <Text style={styles.titleSubHeader}>
-                                Unité enquêtée
-                            </Text>
-                            <Text style={styles.titleLabel}>
-                                {usualSurveyUnitId}
-                            </Text>
-                        </View>
-                    )}
+                    <View style={{ marginBottom: 25 }}>
+                        <Text style={styles.titleSubHeader}>
+                            Unité enquêtée
+                        </Text>
+                        <Text style={styles.titleLabel}>
+                            {usualSurveyUnitId}
+                        </Text>
+                    </View>
 
-                    {validationDate && (
-                        <View style={{ marginBottom: 25 }}>
-                            <Text style={styles.titleSubHeader}>
-                                Date de validation
-                            </Text>
-                            <Text style={styles.titleLabel}>
+                    <View style={{ marginBottom: 25 }}>
+                        <Text style={styles.titleSubHeader}>
+                            Date de validation
+                        </Text>
+                        <Text style={styles.titleLabel}>
 
-                                {validationDate}
-                            </Text>
-                        </View>
-                    )}
+                            {formattedValidationDate}
+                        </Text>
+                    </View>
 
                     <View style={{ marginBottom: 25 }}>
                         <Text style={styles.titleSubHeader}>
