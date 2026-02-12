@@ -17,7 +17,6 @@ type Props = {
 };
 // Create Document Component
 export const LunaticQuestionnaire = ({ source, data }: Props) => {
-  console.log("LunaticQuestionnaire data", data);
   const store = useMemo(
     () => LunaticVariablesStore.makeFromSource(source, data.body.interrogation.data),
     [source, data],
