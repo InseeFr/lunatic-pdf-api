@@ -5,7 +5,7 @@ import { logger } from "../logger";
 import { readAndValidateLunaticData } from "../services/data-service";
 import { generatePdfStream } from "../services/pdf-service";
 import config from "../config/config";
-import { PdfRequestFromUri } from "../types";
+import { PdfRequestFromUri } from "../models/types";
 
 const { trustUriDomains } = config;
 

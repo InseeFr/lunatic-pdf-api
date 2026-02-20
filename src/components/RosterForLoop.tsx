@@ -1,4 +1,4 @@
-import type { LunaticComponentProps } from "../types";
+import type { LunaticComponentProps } from "../models/types";
 import { ValueWithLabel } from "./ValueWithLabel";
 import { decorateInterpretIteration } from "../utils/vtl";
 import { LunaticComponent } from "./LunaticComponent";
@@ -68,7 +68,6 @@ export function RosterForLoop({
   if (shouldSplit) {
     const firstHalf = components.slice(0, splitPoint);
     const secondHalf = components.slice(splitPoint);
-    console.log({ firstHalf, secondHalf });
     return (
       <ValueWithLabel interpret={interpret} label={label}>
         <View wrap>
