@@ -1,6 +1,6 @@
 {
   "name": "lunatic-pdf-api",
-  "version": "1.5.2",
+  "version": "1.5.3-rc.title-page",
   "description": "",
   "scripts": {
     "dev:preview": "vite",
