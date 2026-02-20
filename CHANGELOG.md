@@ -12,6 +12,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added a title page to the generated PDF with survey title, validation date, and generation date
 - Added a footer to each page of the PDF with page numbers and survey title
 
+### Removed
+
+- Removed unused endpoint that generates PDF from source URI
+
 ## [1.3.0] - 2025-12-30
 
 ### Added

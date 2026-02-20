@@ -16,13 +16,6 @@ export type VTLExpression = {
   type: "VTL" | "VTL|MD" | "TXT";
 };
 
-export interface PdfRequestFromUri extends Request {
-  query: {
-    source?: string;
-  };
-  body: unknown;
-}
-
 export interface PdfRequestFromBody extends Request {
   body: {
     /**

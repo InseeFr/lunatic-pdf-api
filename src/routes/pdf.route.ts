@@ -1,62 +1,10 @@
 import express from "express";
-import { generatePdf as generatePdfWithUri } from "../controllers/pdf-source-uri.controller";
 import { generatePdf } from "../controllers/pdf-source-form-data.controller";
 import {
   validatePdfFormDataRequest,
-  validatePdfUriRequest,
 } from "../middleware/validate-pdf-request";
 
 const pdfRouter = express.Router();
-
-/**
- * @swagger
- * /api/pdf/generate-from-source:
- *   post:
- *     tags:
- *       - Pdf generation
- *     summary: Generate a PDF from a source as URI and provided data in body of request
- *     description: |
- *       This endpoint generates a PDF based on:
- *       - a **source** (the Lunatic questionnaire URL) provided as a query parameter. (ex URI from Registry-Api )
- *       - a Lunatic **data** provided in the request body (JSON format, can be object included the key _data_ that includes Lunatic Data, or LunaticData directly).
- *
- *       The PDF is returned as a binary file with the header `Content-Disposition: attachment; filename=export.pdf`.
- *     parameters:
- *       - in: query
- *         name: source
- *         required: true
- *         description: URL of the Lunatic questionnaire (URI format)
- *         schema:
- *           type: string
- *           format: uri
- *     requestBody:
- *       required: true
- *       description: Data used to populate the PDF
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             additionalProperties: true
- *             description: |
- *               - `data` (object): Questionnaire data
- *     responses:
- *       '200':
- *         description: Returns a PDF file
- *         content:
- *           application/pdf:
- *             schema:
- *               type: string
- *               format: binary
- *       '400':
- *         description: Missing or invalid `source` parameter
- *       '500':
- *         description: Internal server error during PDF generation
- */
-pdfRouter.post(
-  "/generate-from-source",
-  validatePdfUriRequest,
-  generatePdfWithUri
-);
 
 /**
  * @swagger

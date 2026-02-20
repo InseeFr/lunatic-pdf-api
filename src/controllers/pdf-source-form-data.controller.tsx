@@ -11,9 +11,24 @@ export const generatePdf = async (req: PdfRequestFromBody, res: Response) => {
     const source = requestBody.source;
     const { data: interrogationData, ...interrogationProps } = requestBody.interrogation;
     logger.info(`generate PDF with params: ${JSON.stringify(interrogationProps)}`)
-    const data = readAndValidateLunaticData(res, interrogationData);
+
+    const data = readAndValidateLunaticData(interrogationData);
+
     await generatePdfStream(res, source, data, interrogationProps);
   } catch (e) {
+
+    if (e instanceof Error && e.message.includes("Invalid Lunatic Data")) {
+      return handleError(
+        res,
+        ErrorCode.INVALID_DATA,
+        "Invalid Lunatic Data.",
+        400,
+        { error: e.message },
+        e
+      );
+    }
+
+    // Handle PDF generation errors
     return handleError(
       res,
       ErrorCode.PDF_GENERATION_ERROR,
