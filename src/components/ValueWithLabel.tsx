@@ -2,7 +2,7 @@ import type { PropsWithChildren, ReactNode } from "react";
 import { View } from "@react-pdf/renderer";
 import { depth, styles } from "./styles";
 import { renderContent } from "../utils/markdownParser";
-import { VTLExpression } from "../types";
+import { VTLExpression } from "../models/types";
 
 type Props = PropsWithChildren<{
   interpret: (expr: VTLExpression | string | undefined) => ReactNode;
