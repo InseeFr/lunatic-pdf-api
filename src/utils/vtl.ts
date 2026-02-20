@@ -29,7 +29,7 @@ export function makeInterpret(store: LunaticVariablesStore) {
  */
 export function decorateInterpretIteration(
   interpreter: Interpreter,
-  iteration: number[]
+  iteration: number[],
 ) {
   return (...args: Parameters<Interpreter>) => {
     return interpreter(args[0], args[1] ?? iteration);
