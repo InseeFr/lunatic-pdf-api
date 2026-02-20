@@ -5,8 +5,9 @@ import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { Footer } from './Footer';
 
+const mockRenderObject = { pageNumber: 1, totalPages: 5 };
 vi.mock('@react-pdf/renderer', () => ({
-    Text: ({ children, style }: any) => <span data-testid="pdf-text">{children}</span>,
+    Text: ({ children, render }: any) => <span data-testid="pdf-text">{children}</span>,
     View: ({ children, style }: any) => <div data-testid="pdf-view" >{children}</div>,
     Font: {
         register: vi.fn(),
@@ -32,6 +33,11 @@ describe('Footer', () => {
         expect(screen.getByText(/12345/i)).toBeInTheDocument();
     });
 
+    it('render the right number of pages', () => {
+        const mockSurveyTitle = "Test Survey";
+        const mockUsualSurveyUnitId = "12345";
 
+        render(<Footer surveyTitle={mockSurveyTitle} usualSurveyUnitId={mockUsualSurveyUnitId} />); const pageNumberText = screen.getByText(/Page 1 \/ 5/i); expect(pageNumberText).toBeInTheDocument();
+    })
 
 });

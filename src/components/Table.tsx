@@ -19,7 +19,7 @@ export function Table({ interpret, label, body, header }: Props) {
 
   const renderHeader = () => (
     header && (
-      <PDFTh fixed>
+      <PDFTh>
         {header.map((col, x) => (
           <PDFTd key={x} style={styles.th}>
             {renderContent(interpret, col.label, styles.headerText)}
@@ -34,7 +34,7 @@ export function Table({ interpret, label, body, header }: Props) {
         <PDFTable style={styles.table}>
           {renderHeader()}
           {body.map((row, y) => (
-            <PDFTr key={y} wrap={false}>
+            <PDFTr key={y}>
               {row.map((col, x) => (
                 <PDFTd key={x} style={styles.td}>
                   {"componentType" in col ? (

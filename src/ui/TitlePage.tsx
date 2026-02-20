@@ -1,5 +1,4 @@
 import React from 'react';
-//import { PdfRequestFromBody } from '../models/types';
 import { Page, View, Text } from '@react-pdf/renderer';
 import { styles } from '../components/styles';
 import { LogoInsee } from './LogoInsee';

@@ -9,9 +9,10 @@ export const generatePdf = async (req: PdfRequestFromBody, res: Response) => {
   const requestBody = req.body;
   try {
     const source = requestBody.source;
-    logger.info(`generate PDF with params: ${JSON.stringify(requestBody.interrogation)}`)
-    const data = readAndValidateLunaticData(res, requestBody.interrogation.data);
-    await generatePdfStream(res, source, data);
+    const { data: interrogationData, ...interrogationProps } = requestBody.interrogation;
+    logger.info(`generate PDF with params: ${JSON.stringify(interrogationProps)}`)
+    const data = readAndValidateLunaticData(res, interrogationData);
+    await generatePdfStream(res, source, data, interrogationProps);
   } catch (e) {
     return handleError(
       res,

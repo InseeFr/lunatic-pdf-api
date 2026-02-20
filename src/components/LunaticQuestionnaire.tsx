@@ -1,5 +1,6 @@
 import { useMemo } from "react";
 import {
+  LunaticData,
   type LunaticSource,
   LunaticVariablesStore,
 } from "@inseefr/lunatic";
@@ -7,23 +8,24 @@ import { Document, Page } from "@react-pdf/renderer";
 import { styles } from "./styles";
 import { makeInterpret } from "../utils/vtl";
 import { LunaticComponents } from "./LunaticComponent";
-import { PdfRequestFromBody } from "../models/types";
+import { InterrogationInfos } from "../models/types";
 import TitlePage from "../ui/TitlePage";
 import Footer from "../ui/Footer";
 
 type Props = {
   source: LunaticSource;
-  data: PdfRequestFromBody;
+  data: LunaticData;
+  interrogationInfos: InterrogationInfos
 };
 // Create Document Component
-export const LunaticQuestionnaire = ({ source, data }: Props) => {
+export const LunaticQuestionnaire = ({ source, data, interrogationInfos }: Props) => {
   const store = useMemo(
-    () => LunaticVariablesStore.makeFromSource(source, data.body.interrogation.data),
+    () => LunaticVariablesStore.makeFromSource(source, data),
     [source, data],
   );
-  const surveyTitle = data.body.interrogation.collectionInstrumentId;
-  const usualSurveyUnitId = data.body.interrogation.usualSurveyUnitId;
-  const validationDate = data.body.interrogation.validationDate;
+  const surveyTitle = interrogationInfos.collectionInstrumentId;
+  const usualSurveyUnitId = interrogationInfos.usualSurveyUnitId;
+  const validationDate = interrogationInfos.validationDate;
   const interpret = useMemo(() => makeInterpret(store), [store]);
   return (
     <Document pageMode="useOutlines">
