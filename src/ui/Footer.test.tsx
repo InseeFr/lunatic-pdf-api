@@ -7,7 +7,11 @@ import { Footer } from './Footer';
 
 const mockRenderObject = { pageNumber: 1, totalPages: 5 };
 vi.mock('@react-pdf/renderer', () => ({
-    Text: ({ children, render }: any) => <span data-testid="pdf-text">{children}</span>,
+    Text: ({ children, render }: any) => (
+        <span data-testid="pdf-text">
+            {render ? render(mockRenderObject) : children}
+        </span>
+    ),
     View: ({ children, style }: any) => <div data-testid="pdf-view" >{children}</div>,
     Font: {
         register: vi.fn(),
@@ -37,7 +41,9 @@ describe('Footer', () => {
         const mockSurveyTitle = "Test Survey";
         const mockUsualSurveyUnitId = "12345";
 
-        render(<Footer surveyTitle={mockSurveyTitle} usualSurveyUnitId={mockUsualSurveyUnitId} />); const pageNumberText = screen.getByText(/Page 1 \/ 5/i); expect(pageNumberText).toBeInTheDocument();
+        render(<Footer surveyTitle={mockSurveyTitle} usualSurveyUnitId={mockUsualSurveyUnitId} />);
+        const pageNumberText = screen.getByText(/Page 1 \/ 5/i);
+        expect(pageNumberText).toBeInTheDocument();
     })
 
 });
