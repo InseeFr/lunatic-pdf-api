@@ -50,15 +50,17 @@ describe("generatePdfStream", () => {
 
     await generatePdfStream(mockRes, mockSource, mockData, mockInterrogationInfos);
 
-    // Check that renderToStream have been called with correct args
     expect(renderToStream).toHaveBeenCalledWith(
       expect.objectContaining({
         type: LunaticQuestionnaire,
-        props: { source: mockSource, data: mockData },
+        props: expect.objectContaining({
+          source: mockSource,
+          data: mockData,
+          interrogationInfos: mockInterrogationInfos,
+        }),
       })
     );
 
-    // Check if header have been set
     expect(mockRes.setHeader).toHaveBeenCalledWith(
       "Content-Type",
       "application/pdf"
