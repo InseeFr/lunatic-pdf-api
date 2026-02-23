@@ -1,7 +1,7 @@
 import { ReactNode } from 'react';
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { RosterForLoop } from './RosterForLoop';
-import type { VTLExpression, LunaticComponentProps } from '../types';
+import type { VTLExpression, LunaticComponentProps } from '../models/types';
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 
