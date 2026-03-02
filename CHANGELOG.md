@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.6.0] - 2025-03-02
+
 ### Added
 
 - Added a title page to the generated PDF with survey title, validation date, and generation date
@@ -15,6 +17,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Removed
 
 - Removed unused endpoint that generates PDF from source URI
+
+## [1.5.0] - 2025-01-15
+
+### Added
+
+- multi OIDC issuer for token validation
+
+## [1.4.1] - 2025-01-15
+
+### Fixed
+
+- use env variable for body size request to enable large questionnaire model
+
+## [1.4.0] - 2025-01-14
+
+### Refactor main end-point
+
+- Remove multipart file requeste, classic json body request instead to generate PDF
 
 ## [1.3.0] - 2025-12-30
 
