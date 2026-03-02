@@ -1,4 +1,4 @@
-import type { LunaticComponentProps, VTLExpression } from "../types";
+import type { LunaticComponentProps, VTLExpression } from "../models/types";
 import { LunaticComponents } from "./LunaticComponent";
 import { Text, View } from "@react-pdf/renderer";
 import { forceBool, forceInt } from "../utils/cast";

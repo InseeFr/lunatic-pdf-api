@@ -1,4 +1,4 @@
-import type { LunaticComponentProps } from "../types";
+import type { LunaticComponentProps } from "../models/types";
 import { ValueWithLabel } from "./ValueWithLabel";
 import { Text } from "@react-pdf/renderer";
 import { styles } from "./styles";

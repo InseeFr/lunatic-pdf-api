@@ -5,7 +5,7 @@ import ReactMarkdown, { Components } from "react-markdown";
 import { Style } from "@react-pdf/stylesheet";
 
 import { styles } from "../components/styles";
-import { VTLExpression } from "../types";
+import { VTLExpression } from "../models/types";
 
 const createPdfComponents = (customStyle?: Style): Components => ({
     h1: ({ children }) => React.createElement(Text, {

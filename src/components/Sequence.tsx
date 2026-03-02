@@ -1,4 +1,4 @@
-import type { LunaticComponentProps } from "../types";
+import type { LunaticComponentProps } from "../models/types";
 import { Text, View } from "@react-pdf/renderer";
 import { styles } from "./styles";
 import type { PropsWithChildren } from "react";

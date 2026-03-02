@@ -11,11 +11,54 @@ const rem = (v: number = 1) => Math.round(v * 16);
 
 export const depth = { current: 1 as 1 | 2 };
 
+
 export const styles = {
 	page: {
-		paddingVertical: rem(1),
-		paddingHorizontal: rem(1),
-		// fontFamily: 'Geist',
+		paddingTop: rem(1),
+		paddingBottom: rem(3),
+		paddingLeft: rem(1),
+		paddingRight: rem(1.5),
+	},
+	titleView: {
+		display: 'flex',
+		flexDirection: 'column',
+		justifyContent: 'center',
+		alignItems: 'center',
+		minHeight: '100%',
+		padding: 50
+	},
+	titleHeader: {
+		fontSize: 24,
+		fontWeight: 'bold',
+		marginBottom: 20,
+		color: '#0a0a0a',
+	},
+	titleSubHeader: {
+		fontSize: 16,
+		fontWeight: 'semibold',
+		color: '#0a0a0a',
+		marginBottom: 5
+	},
+	titleLabel: {
+		fontSize: 12,
+		color: '#737373',
+	},
+	footerBar: {
+		position: 'absolute',
+		bottom: 33,
+		left: 10,
+		right: 10,
+		borderTopWidth: 1,
+		borderTopColor: '#000000',
+	},
+	footerContent: {
+		position: 'absolute',
+		bottom: 8,
+		left: 15,
+		right: 15,
+		flexDirection: 'row',
+		justifyContent: 'space-between',
+		alignItems: 'center',
 	},
 	h1: {
 		color: colors.foreground,

@@ -4,6 +4,7 @@ import { renderToStream } from "@react-pdf/renderer";
 import { LunaticQuestionnaire } from "../components/LunaticQuestionnaire";
 import { ErrorCode } from "../error/api";
 import { LunaticData, LunaticSource } from "@inseefr/lunatic";
+import { InterrogationInfos } from "../models/types";
 
 vi.mock("@react-pdf/renderer", () => {
   return {
@@ -45,18 +46,21 @@ describe("generatePdfStream", () => {
   it("should generate PDF stream successfully", async () => {
     const mockSource = {} as LunaticSource;
     const mockData = {} as LunaticData;
+    const mockInterrogationInfos = {} as InterrogationInfos
 
-    await generatePdfStream(mockRes, mockSource, mockData);
+    await generatePdfStream(mockRes, mockSource, mockData, mockInterrogationInfos);
 
-    // Check that renderToStream have been called with correct args
     expect(renderToStream).toHaveBeenCalledWith(
       expect.objectContaining({
         type: LunaticQuestionnaire,
-        props: { source: mockSource, data: mockData },
+        props: expect.objectContaining({
+          source: mockSource,
+          data: mockData,
+          interrogationInfos: mockInterrogationInfos,
+        }),
       })
     );
 
-    // Check if header have been set
     expect(mockRes.setHeader).toHaveBeenCalledWith(
       "Content-Type",
       "application/pdf"
@@ -87,8 +91,9 @@ describe("generatePdfStream", () => {
     );
     const mockSource = {} as LunaticSource;
     const mockData = {} as LunaticData;
+    const mockInterrogationInfos = {} as InterrogationInfos
 
-    await generatePdfStream(mockRes, mockSource, mockData);
+    await generatePdfStream(mockRes, mockSource, mockData, mockInterrogationInfos);
 
     // Check that handleError have been called with correct args
     expect(mockRes.status).toHaveBeenCalledWith(500);

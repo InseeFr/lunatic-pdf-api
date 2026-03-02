@@ -5,9 +5,11 @@ import interrogationData from "./data.json";
 
 import { LunaticQuestionnaire } from "../components/LunaticQuestionnaire";
 
+const data = interrogationData.data;
+
 createRoot(document.getElementById("root")!).render(
   <PDFViewer>
     {/* @ts-ignore*/}
-    <LunaticQuestionnaire source={source} data={interrogationData.data} />
+    <LunaticQuestionnaire source={source} data={data} interrogationInfos={interrogationData} />
   </PDFViewer>
 );

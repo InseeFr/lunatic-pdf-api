@@ -1,5 +1,5 @@
 import { Text } from "@react-pdf/renderer";
-import { LunaticComponentProps } from "../types";
+import { LunaticComponentProps } from "../models/types";
 import { ValueWithLabel } from "./ValueWithLabel";
 import { styles } from "./styles";
 

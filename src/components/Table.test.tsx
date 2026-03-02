@@ -1,7 +1,7 @@
 import { ReactNode } from 'react';
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { Table } from './Table';
-import type { VTLExpression } from '../types';
+import type { VTLExpression } from '../models/types';
 import { render, screen } from '@testing-library/react';
 
 import '@testing-library/jest-dom';

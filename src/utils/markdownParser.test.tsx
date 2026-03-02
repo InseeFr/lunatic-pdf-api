@@ -3,7 +3,7 @@ import { describe, it, expect, vi } from 'vitest';
 import '@testing-library/jest-dom';
 
 import { MarkdownPDF, renderContent } from './markdownParser';
-import { VTLExpression } from '../types';
+import { VTLExpression } from '../models/types';
 
 vi.mock('../../components/styles', () => ({
     styles: {

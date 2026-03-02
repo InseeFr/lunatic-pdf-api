@@ -1,4 +1,4 @@
-import type { LunaticComponentProps } from "../types";
+import type { LunaticComponentProps } from "../models/types";
 import { LunaticComponent } from "./LunaticComponent";
 import { ValueWithLabel } from "./ValueWithLabel";
 
