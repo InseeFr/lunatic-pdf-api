@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.6.1] - 2025-03-02
+
+### Fixed
+
+- build: upgrade base run docker image (dhi.io/node:24.13.0-alpine3.23 -> dhi.io/node:24.14.0-alpine3.23)
+
 ## [1.6.0] - 2025-03-02
 
 ### Added
