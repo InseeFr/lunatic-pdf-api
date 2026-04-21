@@ -109,7 +109,7 @@ importers:
         version: 10.0.3
       happy-dom:
         specifier: ^20.0.10
-        version: 20.8.3
+        version: 20.8.9
       jest:
         specifier: ^30.2.0
         version: 30.3.0(@types/node@24.12.2)
@@ -136,7 +136,7 @@ importers:
         version: 7.3.1(@types/node@24.12.2)(sass@1.99.0)(tsx@4.21.0)
       vitest:
         specifier: ^4.0.6
-        version: 4.1.0(@types/node@24.12.2)(@vitest/ui@4.1.0)(happy-dom@20.8.3)(vite@7.3.1(@types/node@24.12.2)(sass@1.99.0)(tsx@4.21.0))
+        version: 4.1.0(@types/node@24.12.2)(@vitest/ui@4.1.0)(happy-dom@20.8.9)(vite@7.3.1(@types/node@24.12.2)(sass@1.99.0)(tsx@4.21.0))
 
 packages:
 
@@ -2355,8 +2355,8 @@ packages:
     engines: {node: '>=0.4.7'}
     hasBin: true
 
-  happy-dom@20.8.3:
-    resolution: {integrity: sha512-lMHQRRwIPyJ70HV0kkFT7jH/gXzSI7yDkQFe07E2flwmNDFoWUTRMKpW2sglsnpeA7b6S2TJPp98EbQxai8eaQ==}
+  happy-dom@20.8.9:
+    resolution: {integrity: sha512-Tz23LR9T9jOGVZm2x1EPdXqwA37G/owYMxRwU0E4miurAtFsPMQ1d2Jc2okUaSjZqAFz2oEn3FLXC5a0a+siyA==}
     engines: {node: '>=20.0.0'}
 
   has-flag@4.0.0:
@@ -3964,8 +3964,8 @@ packages:
     resolution: {integrity: sha512-+QU2zd6OTD8XWIJCbffaiQeH9U73qIqafo1x6V1snCWYGJf6cVE0cDR4D8xRzcEnfI21IFrUPzPGtcPf8AC+Rw==}
     engines: {node: ^14.17.0 || ^16.13.0 || >=18.0.0}
 
-  ws@8.19.0:
-    resolution: {integrity: sha512-blAT2mjOEIi0ZzruJfIhb3nps74PRWTCz1IjglWEEpQl5XS/UNama6u2/rjFkDDouqr4L67ry+1aGIALViWjDg==}
+  ws@8.20.0:
+    resolution: {integrity: sha512-sAt8BhgNbzCtgGbt2OxmpuryO63ZoDk/sqaB/znQm94T4fCEsy/yV+7CdC1kJhOU9lboAEU7R3kquuycDoibVA==}
     engines: {node: '>=10.0.0'}
     peerDependencies:
       bufferutil: ^4.0.1
@@ -5365,7 +5365,7 @@ snapshots:
       obug: 2.1.1
       std-env: 4.0.0
       tinyrainbow: 3.0.3
-      vitest: 4.1.0(@types/node@24.12.2)(@vitest/ui@4.1.0)(happy-dom@20.8.3)(vite@7.3.1(@types/node@24.12.2)(sass@1.99.0)(tsx@4.21.0))
+      vitest: 4.1.0(@types/node@24.12.2)(@vitest/ui@4.1.0)(happy-dom@20.8.9)(vite@7.3.1(@types/node@24.12.2)(sass@1.99.0)(tsx@4.21.0))
 
   '@vitest/expect@4.1.0':
     dependencies:
@@ -5411,7 +5411,7 @@ snapshots:
       sirv: 3.0.2
       tinyglobby: 0.2.15
       tinyrainbow: 3.1.0
-      vitest: 4.1.0(@types/node@24.12.2)(@vitest/ui@4.1.0)(happy-dom@20.8.3)(vite@7.3.1(@types/node@24.12.2)(sass@1.99.0)(tsx@4.21.0))
+      vitest: 4.1.0(@types/node@24.12.2)(@vitest/ui@4.1.0)(happy-dom@20.8.9)(vite@7.3.1(@types/node@24.12.2)(sass@1.99.0)(tsx@4.21.0))
 
   '@vitest/utils@4.1.0':
     dependencies:
@@ -6286,14 +6286,14 @@ snapshots:
     optionalDependencies:
       uglify-js: 3.19.3
 
-  happy-dom@20.8.3:
+  happy-dom@20.8.9:
     dependencies:
       '@types/node': 24.12.2
       '@types/whatwg-mimetype': 3.0.2
       '@types/ws': 8.18.1
       entities: 7.0.1
       whatwg-mimetype: 3.0.0
-      ws: 8.19.0
+      ws: 8.20.0
     transitivePeerDependencies:
       - bufferutil
       - utf-8-validate
@@ -8200,7 +8200,7 @@ snapshots:
       sass: 1.99.0
       tsx: 4.21.0
 
-  vitest@4.1.0(@types/node@24.12.2)(@vitest/ui@4.1.0)(happy-dom@20.8.3)(vite@7.3.1(@types/node@24.12.2)(sass@1.99.0)(tsx@4.21.0)):
+  vitest@4.1.0(@types/node@24.12.2)(@vitest/ui@4.1.0)(happy-dom@20.8.9)(vite@7.3.1(@types/node@24.12.2)(sass@1.99.0)(tsx@4.21.0)):
     dependencies:
       '@vitest/expect': 4.1.0
       '@vitest/mocker': 4.1.0(vite@7.3.1(@types/node@24.12.2)(sass@1.99.0)(tsx@4.21.0))
@@ -8225,7 +8225,7 @@ snapshots:
     optionalDependencies:
       '@types/node': 24.12.2
       '@vitest/ui': 4.1.0(vitest@4.1.0)
-      happy-dom: 20.8.3
+      happy-dom: 20.8.9
     transitivePeerDependencies:
       - msw
 
@@ -8296,7 +8296,7 @@ snapshots:
       imurmurhash: 0.1.4
       signal-exit: 4.1.0
 
-  ws@8.19.0: {}
+  ws@8.20.0: {}
 
   y18n@5.0.8: {}
 
