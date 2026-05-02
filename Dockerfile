@@ -16,7 +16,7 @@ RUN npm install -g pnpm@latest-10
 
 RUN pnpm install --prod
 
-FROM dhi.io/node:24.14.0-alpine3.23
+FROM dhi.io/node:24.15.0-alpine3.23
 
 ENV NODE_ENV=production
 
