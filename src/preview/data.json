@@ -1,32 +1,27 @@
 {
-  "id": "",
-  "questionnaireId": "",
+  "interrogationId": "id-accessibility",
+  "usualSurveyUnitId": "id-accessibility",
+  "collectionInstrumentId": "RESPDESIGN",
+  "validationDate": "2026-03-30T12:50:29.885983443Z",
   "data": {
-    "CALCULATED": {
-      "AGEPRENOM": null,
-      "NBADULTES": 0,
-      "CIVILITE": null,
-      "TOTAL_TAB": 0
-    },
-    "EXTERNAL": {},
     "COLLECTED": {
       "TEXTECOURT": {
-        "COLLECTED": "igyuh"
+        "COLLECTED": "Je suis la réponse à la question texte court"
       },
       "TEXTELONG": {
-        "COLLECTED": null
+        "COLLECTED": "That’s what I think too. The others laugh, but I know they’re real. One day, I will meet one. Even if it means joining an Expedition! I’ll raise a Gestral army and we’ll crush the Paintress! And me and my little brother will live with the Gestrals and they’ll be our new family. We’re tired of the orphanage… If the legends are true, they really like to fight. That’s why I’m training everyday by beating up my little brother!"
       },
       "INTEGER": {
-        "COLLECTED": null
+        "COLLECTED": 100
       },
       "FLOAT": {
-        "COLLECTED": null
+        "COLLECTED": 0.01
       },
       "UNIT": {
-        "COLLECTED": null
+        "COLLECTED": 100
       },
       "DATE": {
-        "COLLECTED": null
+        "COLLECTED": "2025-06-30"
       },
       "DATEMOIS": {
         "COLLECTED": null
@@ -41,7 +36,7 @@
         "COLLECTED": null
       },
       "BOOLEEN": {
-        "COLLECTED": null
+        "COLLECTED": true
       },
       "RADIO": {
         "COLLECTED": null
@@ -146,7 +141,7 @@
         "COLLECTED": null
       },
       "TABLEAU1A1M31": {
-        "COLLECTED": null
+        "COLLECTED": 33
       },
       "TABLEAU1A1M41": {
         "COLLECTED": null
@@ -197,7 +192,7 @@
         "COLLECTED": null
       },
       "TABLEAU1A3M53": {
-        "COLLECTED": null
+        "COLLECTED": "I'm Amicia De Rune, And I Kneel To No One"
       },
       "TABLEAU2A11": {
         "COLLECTED": null
@@ -344,7 +339,7 @@
         "COLLECTED": [null]
       },
       "PRENOM": {
-        "COLLECTED": null
+        "COLLECTED": "Monoco"
       },
       "EMAIL": {
         "COLLECTED": null
@@ -379,11 +374,13 @@
       "TAILLE": {
         "COLLECTED": []
       }
-    }
-  },
-  "stateData": {
-    "state": "INIT",
-    "date": 1761730120210,
-    "currentPage": "26"
+    },
+    "CALCULATED": {
+      "AGEPRENOM": null,
+      "NBADULTES": 0,
+      "CIVILITE": null,
+      "TOTAL_TAB": 0
+    },
+    "EXTERNAL": {}
   }
 }
