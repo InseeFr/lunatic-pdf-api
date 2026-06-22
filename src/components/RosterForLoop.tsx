@@ -45,12 +45,12 @@ export function RosterForLoop({
   );
 
   const renderTable = (cols: typeof components, startIndex: number) => (
-    <Table style={styles.table} >
+    <Table style={styles.table} wrap={true}>
       {renderHeader(cols, startIndex)}
       {Array.from({ length: iterations }).map((_, k) => {
         const interpretAtIteration = decorateInterpretIteration(interpret, [k]);
         return (
-          <PDFTr key={k} wrap={false}>
+          <PDFTr key={k}>
             {cols.map((component, j) => (
               <PDFTd key={j} style={styles.td}>
                 <LunaticComponent

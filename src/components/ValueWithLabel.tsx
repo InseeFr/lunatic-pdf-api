@@ -15,8 +15,8 @@ export function ValueWithLabel({ interpret, label, children }: Props) {
   }
   if (depth.current === 2) {
     return (
-      <View style={styles.question1} wrap={false}>
-        <View style={[styles.question1, styles.question]} wrap={false}>
+      <View style={styles.question} wrap={false}>
+        <View style={ styles.question} wrap={false}>
           {renderContent(interpret, label, styles.label)}
           {children}
         </View>
@@ -24,7 +24,7 @@ export function ValueWithLabel({ interpret, label, children }: Props) {
     );
   }
   return (
-    <View style={[styles.question, styles.question1]} wrap={true}>
+    <View style={styles.question} wrap={true}>
       {renderContent(interpret, label, styles.label)}
       {children}
     </View>
