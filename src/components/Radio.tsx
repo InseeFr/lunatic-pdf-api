@@ -5,18 +5,22 @@ import { styles } from "./styles";
 
 type Props = LunaticComponentProps<"Radio">;
 
-export function Radio({ interpret, label, response, options }: Props) {
+export function Radio(definition: Props) {
+  const { interpret, label, response } = definition;
+  let displayValue;
+
   const value = interpret(response.name);
-  const selectedOption = options.find((o) => o.value === value);
+
+  if ("optionSource" in definition && definition.optionSource) {
+    displayValue = value;
+  } else if ("options" in definition && definition.options) {
+    const selectedOption = definition.options.find((o) => o.value === value);
+    displayValue = selectedOption  ? `${value} - ${interpret(selectedOption.label)}`  : "Aucune option sélectionnée";
+  }
 
   return (
     <ValueWithLabel interpret={interpret} label={label}>
-      <Text style={styles.answer}>
-        {value} -{" "}
-        {selectedOption
-          ? interpret(selectedOption.label)
-          : "Aucune option sélectionnée"}
-      </Text>
+      <Text style={styles.answer}>{displayValue}</Text>
     </ValueWithLabel>
   );
 }

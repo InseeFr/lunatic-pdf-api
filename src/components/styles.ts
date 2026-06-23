@@ -82,7 +82,7 @@ export const styles = {
 		marginBottom: rem(0.5),
 	},
 	question: {
-		marginBottom: rem(0.5),
+		marginBottom: rem(1),
 	},
 	sequence: {
 		paddingLeft: rem(1),
@@ -139,8 +139,7 @@ export const styles = {
 		marginBottom: 0,
 	},
 	table: {
-		marginBottom: rem(1),
-		marginTop: rem(0.5),
+		paddingTop: rem(0.5),
 	},
 	list: {
 		marginBottom: rem(1),

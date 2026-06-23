@@ -17,8 +17,8 @@ importers:
         specifier: ^2.0.3
         version: 2.0.3(@react-pdf/renderer@4.3.1(react@19.2.4))(@react-pdf/stylesheet@6.1.4)(react@19.2.4)
       '@inseefr/lunatic':
-        specifier: ^3.11.2
-        version: 3.13.3(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+        specifier: ^3.13.4
+        version: 3.13.4(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       '@react-pdf/renderer':
         specifier: ^4.3.1
         version: 4.3.1(react@19.2.4)
@@ -763,8 +763,8 @@ packages:
     resolution: {integrity: sha512-bV0Tgo9K4hfPCek+aMAn81RppFKv2ySDQeMoSZuvTASywNTnVJCArCZE2FWqpvIatKu7VMRLWlR1EazvVhDyhQ==}
     engines: {node: '>=18.18'}
 
-  '@inseefr/lunatic@3.13.3':
-    resolution: {integrity: sha512-uyd04vHlsM2Ba9IzdmQXorQPMYBi838HVbVy0BQnD+Cgw8HVo0Ve7Lp/ue/CziqdryogkcBtT2CHD3WXLZ3wPg==}
+  '@inseefr/lunatic@3.13.4':
+    resolution: {integrity: sha512-NTp1Llabfjfq2ALc/11Rz4i/Wt6JgLVT7Ny3fjsJ0gXrTA/xyn65uXYZAkmkB86Zfnh/sbm+CslSbPZ+Fj+/7Q==}
     peerDependencies:
       react: ^19.2.3
 
@@ -4520,7 +4520,7 @@ snapshots:
 
   '@humanwhocodes/retry@0.4.3': {}
 
-  '@inseefr/lunatic@3.13.3(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)':
+  '@inseefr/lunatic@3.13.4(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)':
     dependencies:
       '@inseefr/trevas': 0.1.21
       '@inseefr/vtl-2.0-antlr-tools': 0.3.2
@@ -5800,7 +5800,7 @@ snapshots:
 
   date-fns@2.30.0:
     dependencies:
-      '@babel/runtime': 7.29.2
+      '@babel/runtime': 7.29.7
 
   dayjs@1.11.20: {}
 
@@ -7586,7 +7586,7 @@ snapshots:
 
   react-error-boundary@4.1.2(react@19.2.4):
     dependencies:
-      '@babel/runtime': 7.29.2
+      '@babel/runtime': 7.29.7
       react: 19.2.4
 
   react-error-boundary@6.1.1(react@19.2.4):

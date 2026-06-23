@@ -11,8 +11,6 @@ import {
 } from "@ag-media/react-pdf-table";
 import { styles } from "./styles";
 import { renderContent } from "../utils/markdownParser";
-import { View } from "@react-pdf/renderer";
-
 type Props = LunaticComponentProps<"Table">;
 
 export function Table({ interpret, label, body, header }: Props) {
@@ -30,29 +28,27 @@ export function Table({ interpret, label, body, header }: Props) {
   );
   return (
     <ValueWithLabel interpret={interpret} label={label}>
-      <View wrap>
-        <PDFTable style={styles.table}>
-          {renderHeader()}
-          {body.map((row, y) => (
-            <PDFTr key={y}>
-              {row.map((col, x) => (
-                <PDFTd key={x} style={styles.td}>
-                  {"componentType" in col ? (
-                    <ErrorBoundary
-                      fallback={<article>Error {col.componentType}</article>}
-                      key={x}
-                    >
-                      <LunaticComponent interpret={interpret} component={col} />
-                    </ErrorBoundary>
-                  ) : (
-                    renderContent(interpret, col.label, styles.answer)
-                  )}
-                </PDFTd>
-              ))}
-            </PDFTr>
-          ))}
-        </PDFTable>
-      </View>
+      <PDFTable style={styles.table} wrap={true}>
+        {renderHeader()}
+        {body.map((row, y) => (
+          <PDFTr key={y}>
+            {row.map((col, x) => (
+              <PDFTd key={x} style={styles.td}>
+                {"componentType" in col ? (
+                  <ErrorBoundary
+                    fallback={<article>Error {col.componentType}</article>}
+                    key={x}
+                  >
+                    <LunaticComponent interpret={interpret} component={col} />
+                  </ErrorBoundary>
+                ) : (
+                  renderContent(interpret, col.label, styles.answer)
+                )}
+              </PDFTd>
+            ))}
+          </PDFTr>
+        ))}
+      </PDFTable>
     </ValueWithLabel>
   );
 }

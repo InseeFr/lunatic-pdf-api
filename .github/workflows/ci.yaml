@@ -9,6 +9,26 @@ on:
     types: [opened, synchronize, reopened]
 
 jobs:
+  build:
+      runs-on: ubuntu-latest
+      if: github.event.head_commit.author.name != 'github-actions[bot]'
+      steps:
+        - uses: actions/checkout@v6
+        - name: Install pnpm
+          uses: pnpm/action-setup@v6
+          with:
+            version: 10
+        - uses: actions/setup-node@v6
+          with:
+            node-version: '24'
+            cache: 'pnpm'
+        - name: Install dependencies
+          run: pnpm install
+        - run: pnpm run build
+        - uses: actions/upload-artifact@v7
+          with:
+            name: dist
+            path: dist
   check_if_version_upgraded:
     runs-on: ubuntu-latest
     if: |
