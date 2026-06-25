@@ -7,9 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.6.2] - 2026-06-25
+
 ### Fixed
 
 - Fixed Table and RosterForLoop margin to avoid content overflow on PDF output
+
+### Changed
+
+- build: upgrade build & run docker image to node:24.18.0-alpine3.23
+- renovate configuration (bump strategy)
+- deps: upgrade dependencies & devDependencies
 
 ## [1.6.1] - 2025-03-02
 
