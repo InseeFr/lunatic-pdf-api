@@ -29,7 +29,7 @@ importers:
         specifier: ^17.4.2
         version: 17.4.2
       express:
-        specifier: ^5.1.0
+        specifier: ^5.2.1
         version: 5.2.1
       express-jwt:
         specifier: ^8.5.1
@@ -38,8 +38,8 @@ importers:
         specifier: ^8.2.0
         version: 8.2.0
       jwks-rsa:
-        specifier: ^4.0.0
-        version: 4.0.1
+        specifier: ^4.1.0
+        version: 4.1.0
       react:
         specifier: ^19.2.7
         version: 19.2.7
@@ -56,7 +56,7 @@ importers:
         specifier: ^5.0.1
         version: 5.0.1(express@5.2.1)
       winston:
-        specifier: ^3.18.3
+        specifier: ^3.19.0
         version: 3.19.0
     devDependencies:
       '@testing-library/jest-dom':
@@ -2757,8 +2757,8 @@ packages:
   jwa@1.4.2:
     resolution: {integrity: sha512-eeH5JO+21J78qMvTIDdBXidBd6nG2kZjg5Ohz/1fpa28Z4CcsWUzJ1ZZyFq/3z3N17aZy+ZuBoHljASbL1WfOw==}
 
-  jwks-rsa@4.0.1:
-    resolution: {integrity: sha512-poXwUA8S4cP9P5N8tZS3xnUDJH8WmwSGfKK9gIaRPdjLHyJtd9iX/cngX9CUIe0Caof5JhK2EbN7N5lnnaf9NA==}
+  jwks-rsa@4.1.0:
+    resolution: {integrity: sha512-sbkByqyATKYJP5F4RXj03N5TUNC0QLTjCAZvwTzC4BwJZ8e0/cWxN8YROnyUth2g1/ONWi4eSFHeu6oYalrc3Q==}
     engines: {node: ^20.19.0 || ^22.12.0 || >= 23.0.0}
 
   jws@3.2.3:
@@ -3282,10 +3282,6 @@ packages:
 
   pure-rand@7.0.1:
     resolution: {integrity: sha512-oTUZM/NAZS8p7ANR3SHh30kXB+zK2r2BPcEn/awJIbOvq82WoMN4p62AWWp3Hhw50G0xMsw1mhIBLqHw64EcNQ==}
-
-  qs@6.14.1:
-    resolution: {integrity: sha512-4EK3+xJl8Ts67nLYNwqw/dsFVnCf+qR7RgXSK9jEEm9unao3njwMDdmsdvoKBKHzxd7tCYz5e5M+SnMjdtXGQQ==}
-    engines: {node: '>=0.6'}
 
   qs@6.15.1:
     resolution: {integrity: sha512-6YHEFRL9mfgcAvql/XhwTvf5jKcOiiupt2FiJxHkiX1z4j7WL8J/jRHYLluORvc1XxB5rV20KoeK00gVJamspg==}
@@ -5558,7 +5554,7 @@ snapshots:
       http-errors: 2.0.1
       iconv-lite: 0.7.0
       on-finished: 2.4.1
-      qs: 6.14.1
+      qs: 6.15.1
       raw-body: 3.0.2
       type-is: 2.0.1
     transitivePeerDependencies:
@@ -6073,7 +6069,7 @@ snapshots:
       once: 1.4.0
       parseurl: 1.3.3
       proxy-addr: 2.0.7
-      qs: 6.14.1
+      qs: 6.15.1
       range-parser: 1.2.1
       router: 2.2.0
       send: 1.2.0
@@ -6890,12 +6886,13 @@ snapshots:
       ecdsa-sig-formatter: 1.0.11
       safe-buffer: 5.2.1
 
-  jwks-rsa@4.0.1:
+  jwks-rsa@4.1.0:
     dependencies:
       '@types/jsonwebtoken': 9.0.10
       debug: 4.4.3
       jose: 6.2.3
       limiter: 1.1.5
+      lru-cache: 11.4.0
       lru-memoizer: 3.0.0
     transitivePeerDependencies:
       - supports-color
@@ -7520,10 +7517,6 @@ snapshots:
 
   pure-rand@7.0.1: {}
 
-  qs@6.14.1:
-    dependencies:
-      side-channel: 1.1.0
-
   qs@6.15.1:
     dependencies:
       side-channel: 1.1.0
@@ -7908,7 +7901,7 @@ snapshots:
       formidable: 3.5.4
       methods: 1.1.2
       mime: 2.6.0
-      qs: 6.14.1
+      qs: 6.15.1
     transitivePeerDependencies:
       - supports-color
 
