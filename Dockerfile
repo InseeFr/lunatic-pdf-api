@@ -2,7 +2,7 @@ FROM node:24.18.0-alpine3.23 AS build
 COPY . /app
 WORKDIR /app
 
-RUN npm install -g pnpm@latest-10
+RUN npm install -g pnpm@11
 
 RUN pnpm install
 RUN pnpm run build
@@ -12,7 +12,7 @@ FROM node:24.18.0-alpine3.23 AS prod-deps
 COPY . /app
 WORKDIR /app
 
-RUN npm install -g pnpm@latest-10
+RUN npm install -g pnpm@11
 
 RUN pnpm install --prod
 

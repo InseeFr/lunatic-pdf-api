@@ -1,2 +1,8 @@
+allowBuilds:
+  '@parcel/watcher': true
+  '@scarf/scarf': true
+  esbuild: true
+  unrs-resolver: true
+minimumReleaseAge: 0
 patchedDependencies:
   '@react-pdf/render': patches/@react-pdf__render.patch
