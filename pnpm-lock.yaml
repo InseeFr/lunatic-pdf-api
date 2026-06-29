@@ -5,9 +5,7 @@ settings:
   excludeLinksFromLockfile: false
 
 patchedDependencies:
-  '@react-pdf/render':
-    hash: a70f813185d3cc56a3b77989a85256a3f5c857852503ad296f70eefba2eb3e7e
-    path: patches/@react-pdf__render.patch
+  '@react-pdf/render': a70f813185d3cc56a3b77989a85256a3f5c857852503ad296f70eefba2eb3e7e
 
 importers:
 
