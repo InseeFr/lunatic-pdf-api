@@ -19,15 +19,27 @@ export function RosterForLoop({
   if (components.length === 0) {
     return null;
   }
-  const firstComponent = components.filter((c) => "response" in c)[0];
-  if (!firstComponent) {
+  const responseComponents = components.filter((c) => "response" in c);
+  if (responseComponents.length === 0) {
     return "Cannot find a component with a variable inside this RosterForLoop";
   }
-  const firstComponentValue = interpret(firstComponent.response.name);
-  if (!Array.isArray(firstComponentValue)) {
+
+  const arrayValues = responseComponents.reduce<unknown[][]>(
+    (acc, c) => {
+      const value = interpret(c.response.name);
+      if (Array.isArray(value)) {
+        acc.push(value);
+      }
+      return acc;
+    },
+    []
+  );
+
+  if (arrayValues.length === 0) {
     return "Expected an array for the value of the first component";
   }
-  const iterations = firstComponentValue.length;
+
+  const iterations = Math.max(...arrayValues.map((value) => value.length));
   const columnCount = header?.length || components.length;
   const shouldSplit = columnCount > 5;
   const splitPoint = Math.ceil(components.length / 2);

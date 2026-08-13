@@ -1,6 +1,6 @@
 {
   "name": "lunatic-pdf-api",
-  "version": "1.6.3",
+  "version": "1.6.4-rc-table-fix.0",
   "description": "",
   "scripts": {
     "dev:preview": "vite",

@@ -175,4 +175,56 @@ describe('RosterForLoop Component', () => {
         const tables = screen.getAllByTestId('pdf-table');
         expect(tables.length).toBe(2);
     });
+
+    it('renders all rows even when first column array is missing or shorter ', () => {
+        const customInterpret = vi.fn((expr: string | VTLExpression | undefined): ReactNode => {
+            if (typeof expr === 'string') {
+                if (expr === 'short-array') {
+                    return ['Value 1', 'Value 2'];
+                }
+                if (expr === 'long-array') {
+                    return ['Value A', 'Value B', 'Value C', 'Value D'];
+                }
+                return expr;
+            }
+            if (expr && typeof expr === 'object' && 'value' in expr) {
+                return expr.value;
+            }
+            return '';
+        });
+
+        render(
+            <RosterForLoop
+                {...rosterForLoopTestComponent({
+                    interpret: customInterpret,
+                    components: [
+                        {
+                            id: "input-number-1",
+                            max: 100000000,
+                            min: 0.0,
+                            unit: { type: "VTL" as const, value: "\"k€\"" },
+                            decimals: 0,
+                            response: { name: "short-array" },
+                            componentType: "InputNumber" as const,
+                        },
+                        {
+                            id: "input-number-2",
+                            max: 100000000,
+                            min: 0.0,
+                            decimals: 0,
+                            response: { name: "long-array" },
+                            componentType: "InputNumber" as const,
+                        },
+                    ],
+                    header: [
+                        { label: { value: 'Header 1', type: 'VTL|MD' } },
+                        { label: { value: 'Header 2', type: 'VTL|MD' } },
+                    ]
+                })}
+            />
+        );
+
+        const rows = screen.getAllByTestId('pdf-tr');
+        expect(rows.length).toBe(4);
+    });
 });
