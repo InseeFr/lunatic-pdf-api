@@ -7,7 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-### Fixed 
+## [1.6.4] - 2026-08-13
+
+### Fixed
 
 - Table not rendering when first column array is missing
 
