@@ -14,7 +14,7 @@
   "keywords": [],
   "author": "Insee",
   "license": "MIT",
-  "packageManager": "pnpm@11.21.0",
+  "packageManager": "pnpm@11.22.0",
   "devDependencies": {
     "@testing-library/dom": "^10.4.1",
     "@testing-library/jest-dom": "^7.0.1",
