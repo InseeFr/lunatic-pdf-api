@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- swagger configuration works now on Windows
+
 - chore(deps):
   - remove `jest` package (not used)
   - fix cve remaining in lockfile
