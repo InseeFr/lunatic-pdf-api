@@ -13,7 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - chore(deps):
   - remove `jest` package (not used)
-  - fix cve remaining in lockfile
+  - fix cve remaining in lockfile (thanks to the `pnpm audit` command)
   - override `immutable` package version (waiting for the `@inseefr/lunatic` update)
 
 ## [1.6.4] - 2026-08-13
