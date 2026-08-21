@@ -5,4 +5,4 @@ allowBuilds:
   unrs-resolver: true
 minimumReleaseAge: 0
 overrides:
-  immutable@>=5.0.0-beta.1 <5.1.8: ^5.1.8
+  immutable@>=5.0.0-beta.1 <5.1.8: ^5.1.9
