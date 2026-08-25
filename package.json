@@ -31,7 +31,7 @@
     "@vitest/coverage-v8": "4.1.11",
     "@vitest/ui": "^4.1.11",
     "cross-env": "^10.1.0",
-    "eslint": "^10.9.0",
+    "eslint": "^10.9.1",
     "happy-dom": "^20.11.6",
     "prettier": "^3.9.6",
     "react-dom": "^19.2.8",
