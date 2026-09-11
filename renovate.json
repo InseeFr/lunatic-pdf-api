@@ -4,7 +4,6 @@
     "config:recommended"
   ],
   "rangeStrategy": "bump",
-  "prConcurrentLimit": 15,
   "packageRules": [
     {
       "matchPaths": [
@@ -60,17 +59,7 @@
         "dependencies",
         "lunatic"
       ],
-      "bumpVersion": "minor",
-      "dependencyDashboardApproval": true
+      "bumpVersion": "minor"
     },
-    {
-      "matchPaths": [
-        ".github/workflows/**",
-        "ci/**"
-      ],
-      "labels": [
-        "CI"
-      ]
-    }
   ]
 }
