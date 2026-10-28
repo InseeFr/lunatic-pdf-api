@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.6.8] - 2026-10-28
+
+- fix cves by upgrading deps
+
+## [1.6.7] - 2026-10-08
+
+- fix cves by upgrading deps
+
+## [1.6.6] - 2026-09-11
+
+- fix cves by upgrading deps
+
 ## [1.6.5] - 2026-08-21
 
 ### Fixed
